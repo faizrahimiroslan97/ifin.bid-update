@@ -18,7 +18,7 @@ model User {
 
   password Password?
   profile  Profile[]
-
+  apply    Apply[]
 }
 
 model Password {
@@ -49,4 +49,15 @@ model Profile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 
+}
+
+model Apply{
+  id    String @id @default(cuid())
+  type  String
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
 }

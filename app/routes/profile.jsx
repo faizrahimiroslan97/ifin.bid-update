@@ -284,8 +284,8 @@ export default function NewProfilePage() {
           </div>
         )}
       </div>
-
-      <div>
+      
+      <div> 
         <label className="flex w-full flex-col gap-1">
           <span>Date of Birth: </span>
           <input

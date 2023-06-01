@@ -2,7 +2,7 @@ import { prisma } from "~/db.server";
 
 export function getProfile({ id, userId }) {
   return prisma.profile.findFirst({
-    select: { id: true, address:true, date:true, account:true, phone:true, gmail:true, lastname:true, firstname:true},
+    select: { id: true, city:true, postalcode:true, state:true, country:true, address2:true,address1:true, date:true, account:true, phone:true, gmail:true, lastname:true, firstname:true},
     where: { id, userId },
   });
 }
