@@ -1,6 +1,6 @@
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import * as React from "react";
+import { useEffect, useRef } from "react";
 
 import { createProfile } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";

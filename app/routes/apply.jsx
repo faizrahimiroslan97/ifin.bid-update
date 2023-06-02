@@ -14,7 +14,11 @@ import {
 } from "chart.js";
 import {
   FaRegCreditCard,
+  FaHandHoldingUsd,
+  FaCarSide,
+  FaRegBuilding,
 } from "react-icons/fa";
+import { TbHomeDollar } from "react-icons/tb";
 import dashStyles from "~/styles/global.css";
 
 
@@ -35,9 +39,9 @@ export async function action({ request }) {
   const type = formData.get("type");
 
 
-  if (typeof type !== "string" || type.length === 0) {
+  if (typeof type !== "button" || type.length === 0) {
     return json(
-      { errors: { type: "type is required",  } },
+      { errors: { type: "",  } },
       { status: 400 }
     );
   }
@@ -63,7 +67,7 @@ export default function DashboardPage() {
         <head>
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         </head>
-  <Form>
+ 
         <body className='${open ? "ml-0" : "ml-60"} ml-72 flex bg-white p-6'>
           <div className="mx-10 my-6 w-full">
             <div>
@@ -72,6 +76,7 @@ export default function DashboardPage() {
                 Apply of Fianacing
               </span>
             </div>
+        
             <div className="flex-row">
               <div className="w-3/5 flex-col p-0">
                 <div className="m-auto ml-0 flex flex-row pb-2 pt-4 font-poppins">
@@ -90,26 +95,43 @@ export default function DashboardPage() {
                         4.Review Data
                       </span>
                       <div>Choose Financing Service Specifications</div>
-
+                    <Form 
+                      method="post">
                       <div>
-                        <label className="flex w-full flex-col gap-1">
-                          <span>type: </span>
+                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
+                        <FaHandHoldingUsd className="inline-block text-3xl" />
+                          Personal Financing
+                        </div></button>
+                        
+                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
+                        <TbHomeDollar className="inline-block text-3xl" />
+                          Home Financing
+                        </div></button>
+
+                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
+                        <FaCarSide className="inline-block text-3xl" />
+                          Car Financing
+                        </div></button>
+
+                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
+                        <FaRegBuilding className="inline-block text-3xl" />
+                          Business Financing
+                        </div></button>
+
                         <input
                           ref={typeRef}
-                          name="type"
-                          className="flex-1 rounded-md border-2 border-lime-500 px-3 text-lg leading-loose text-black"
                           aria-invalid={actionData?.errors?.type ? true : undefined}
                           aria-errormessage={
                           actionData?.errors?.type ? "type-error" : undefined
                         }
                         />
-                        </label>
+                        
                           {actionData?.errors?.type && (
                         <div className="pt-1 text-red-700" id="type-error">
                         {actionData.errors.type}
                         </div>
                         )}
-                      </div>
+                      
 
                       <div className="text-right">
                         <button
@@ -120,37 +142,18 @@ export default function DashboardPage() {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </Form>
                 </div>
               </div>
             </div>
           </div>
-        </body>
-      </Form>
-    </main>
+        </div>
+      </div>
+    </body>
+  </main>
     
     )
 }
-
-//<button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-//<FaHandHoldingUsd className="inline-block text-3xl" />
-//  Personal Financing
-//</div></button>
-
-//<button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-//<TbHomeDollar className="inline-block text-3xl" />
-//  Home Financing
-//</div></button>
-
-//<button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-//<FaCarSide className="inline-block text-3xl" />
-//  Car Financing
-//</div></button>
-
-//<button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-//<FaRegBuilding className="inline-block text-3xl" />
-//  Business Financing
-//</div></button>
 
 //<div><h1>
  //                         Total Amount
