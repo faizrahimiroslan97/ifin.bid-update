@@ -20,10 +20,11 @@ import {
 } from "react-icons/fa";
 import { TbHomeDollar } from "react-icons/tb";
 import dashStyles from "~/styles/global.css";
-
+import range from "~/styles/range.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: dashStyles }];
+
 }
 
 export const meta = () => {
@@ -65,7 +66,7 @@ export default function DashboardPage() {
       
         <main>
         <head>
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script src="C:\Users\zafiz\OneDrive\Desktop\FX\app\styles"></script>
         </head>
  
         <body className='${open ? "ml-0" : "ml-60"} ml-72 flex bg-white p-6'>
@@ -131,8 +132,7 @@ export default function DashboardPage() {
                         {actionData.errors.type}
                         </div>
                         )}
-                      
-
+                    
                       <div className="text-right">
                         <button
                         type="submit"
@@ -151,19 +151,5 @@ export default function DashboardPage() {
       </div>
     </body>
   </main>
-    
     )
 }
-
-//<div><h1>
- //                         Total Amount
-   //                       <div> <input type="range" min="0" max="10000000" class="slider" id="myRange"></input></div>
-     //                     <p>Value: <span id="TA"></span></p>
-          //                </h1>
-       ///                 <h1>
-//                          Preferred Financing Tenure
-  //                        <div> <input className="slide:bg-lime-600" type="range" min="0" max="10000000" class="slider" id="myRange"></input></div>
-    //                      <p>Value: <span id="PFT"></span></p>
-      //                  </h1>
-///
-   //                   </div>
