@@ -1,156 +1,131 @@
-import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
-import * as React from "react";
-
-import { createApply } from "~/models/apply.server";
-import { requireUserId } from "~/session.server";
+import { Link } from "@remix-run/react";
+import Slider from "../components/Slider";
 import {
-  Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import {
+  FaBars,
+  FaTimes,
+  FaRegUser,
+  FaRegBell,
   FaRegCreditCard,
-  FaHandHoldingUsd,
-  FaCarSide,
-  FaRegBuilding,
+  FaChartBar,
 } from "react-icons/fa";
-import { TbHomeDollar } from "react-icons/tb";
-import dashStyles from "~/styles/global.css";
-import range from "~/styles/range.css";
+import personalfinanceIcon from "img/personal_finance.png";
+import homefinanceIcon from "img/home_finance.png";
+import carfinanceIcon from "img/car_finance.png";
+import businessfinanceIcon from "img/business_finance.png";
 
-export function links() {
-  return [{ rel: "stylesheet", href: dashStyles }];
-
-}
-
-export const meta = () => {
-  return [{ title: "Apply" }];
-};
-
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-
-export async function action({ request }) {
-  const userId = await requireUserId(request);
-
-  const formData = await request.formData();
-  const type = formData.get("type");
-
-
-  if (typeof type !== "button" || type.length === 0) {
-    return json(
-      { errors: { type: "",  } },
-      { status: 400 }
-    );
-  }
-
-  const apply = await createApply({ type, userId });
-
-  return redirect(`/apply/${apply.id}`);
-}
-
-export default function DashboardPage() {
-  const actionData = useActionData();
-  const typeRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (actionData?.errors?.type) {
-      typeRef.current?.focus();
-    }
-  }, [actionData]);
-
-    return(
-      
-        <main>
-        <head>
-          <script src="C:\Users\zafiz\OneDrive\Desktop\FX\app\styles"></script>
-        </head>
- 
-        <body className='${open ? "ml-0" : "ml-60"} ml-72 flex bg-white p-6'>
-          <div className="mx-10 my-6 w-full">
-            <div>
-            <FaRegCreditCard className="inline-block text-3xl" />
-              <span className="ml-4 align-middle font-poppins text-3xl font-bold">
-                Apply of Fianacing
-              </span>
+export default function ifinbidApplyRoute() {
+  return (
+    <div className="mx-10 my-6 w-full">
+      <div className="h-14">
+        <FaRegCreditCard className="inline-block text-3xl" />
+        <span className="ml-4 align-middle font-poppins text-3xl font-bold">
+          Apply for Financing
+        </span>
+      </div>
+      <div className="h-auto">
+        <div className="pb-4 pt-4 font-poppins">
+          <div className="h-184 w-full rounded-2xl border-2 border-gray-300 bg-white pb-2 pt-2 shadow-md drop-shadow-md">
+            <div className="fixed inline-flex w-full flex-row justify-between border-b-2 border-gray-600 text-center">
+              <div className="mx-2 w-full border-b-4 border-lime-800 px-4 py-4 hover:cursor-pointer">
+                <p className="text-xl font-bold">1. Financing Options</p>
+              </div>
+              <div className="mx-2 w-full px-4 py-4 hover:cursor-pointer hover:border-b-4 hover:border-lime-600">
+                <p className="text-xl">2. Identity Verification</p>
+              </div>
+              <div className="mx-2 w-full px-4 py-4 hover:cursor-pointer hover:border-b-4 hover:border-lime-600">
+                <p className="text-xl">3. Income Verification</p>
+              </div>
+              <div className="mx-2 w-full px-4 py-4 hover:cursor-pointer hover:border-b-4 hover:border-lime-600">
+                <p className="text-xl">4. Review Data</p>
+              </div>
             </div>
-        
-            <div className="flex-row">
-              <div className="w-3/5 flex-col p-0">
-                <div className="m-auto ml-0 flex flex-row pb-2 pt-4 font-poppins">
-                  <div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md">
-                    <div className="">
-                      <span className="mr-4 align-middle text-xl font-bold ">
-                        1.Financing Options
-                      </span>
-                      <span className="mr-4 align-middle text-xl font-bold">
-                        2.Identify Verification
-                      </span>
-                      <span className="mr-4 align-middle text-xl font-bold">
-                        3.Income Verification
-                      </span>
-                      <span className="mr-4 align-middle text-xl font-bold">
-                        4.Review Data
-                      </span>
-                      <div>Choose Financing Service Specifications</div>
-                    <Form 
-                      method="post">
-                      <div>
-                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-                        <FaHandHoldingUsd className="inline-block text-3xl" />
-                          Personal Financing
-                        </div></button>
-                        
-                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-                        <TbHomeDollar className="inline-block text-3xl" />
-                          Home Financing
-                        </div></button>
-
-                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-                        <FaCarSide className="inline-block text-3xl" />
-                          Car Financing
-                        </div></button>
-
-                        <button><div className="mr-3 flex w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md hover:bg-lime-500">
-                        <FaRegBuilding className="inline-block text-3xl" />
-                          Business Financing
-                        </div></button>
-
-                        <input
-                          ref={typeRef}
-                          aria-invalid={actionData?.errors?.type ? true : undefined}
-                          aria-errormessage={
-                          actionData?.errors?.type ? "type-error" : undefined
-                        }
-                        />
-                        
-                          {actionData?.errors?.type && (
-                        <div className="pt-1 text-red-700" id="type-error">
-                        {actionData.errors.type}
-                        </div>
-                        )}
-                         
-                         
-                      <div className="text-right">
-                        <button
-                        type="submit"
-                        className="rounded bg-lime-500 px-4 py-2 text-white hover:bg-lime-600 focus:bg-lime-400"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </Form>
+            <div className="my-16 h-fit w-full flex-col px-12 py-4 align-middle">
+              <div className="pt-4 text-2xl font-bold">
+                <span>Choose Financing Service Specifications</span>
+              </div>
+              <p className="pt-6 text-lg">Financing Type</p>
+              <div className="justify-betweenpt-2 inline-flex w-full flex-row pt-6 text-center">
+                <div
+                  id="ftype"
+                  className="mr-4 w-full rounded-md border-2 border-gray-300 px-4 py-2 shadow-md drop-shadow-md hover:cursor-pointer hover:border-black hover:bg-lime-600 hover:text-white"
+                >
+                  <img
+                    src={personalfinanceIcon}
+                    className="m-4 ml-auto mr-auto h-28 w-28"
+                  />
+                  <p className="text-lg">Personal Financing</p>
                 </div>
+                <div
+                  id="ftype"
+                  className="mx-4 w-full rounded-md border-2 border-gray-300 px-4 py-2 shadow-md drop-shadow-md hover:cursor-pointer hover:border-black hover:bg-lime-600 hover:text-white"
+                >
+                  <img
+                    src={homefinanceIcon}
+                    className="m-4 ml-auto mr-auto h-28 w-28"
+                  />
+                  <p className="text-lg">Home Financing</p>
+                </div>
+                <div
+                  id="ftype"
+                  className="mx-4 w-full rounded-md border-2 border-gray-300 px-4 py-2 shadow-md drop-shadow-md hover:cursor-pointer hover:border-black hover:bg-lime-600 hover:text-white"
+                >
+                  <img
+                    src={carfinanceIcon}
+                    className="m-4 ml-auto mr-auto h-28 w-28"
+                  />
+                  <p className="text-lg">Car Financing</p>
+                </div>
+                <div
+                  id="ftype"
+                  className="ml-4 w-full rounded-md border-2 border-gray-300 px-4 py-2 shadow-md drop-shadow-md hover:cursor-pointer hover:border-black hover:bg-lime-600 hover:text-white"
+                >
+                  <img
+                    src={businessfinanceIcon}
+                    className="m-4 ml-auto mr-auto h-28 w-28"
+                  />
+                  <p className="text-lg">Business Financing</p>
+                </div>
+              </div>
+              <div className="pt-6 text-lg">Total Amount</div>
+              <div className="mt-4">
+                <div className="inline-block h-6 w-1/2 pl-6 pr-10">
+                  <Slider />
+                </div>
+                <div className="ml-2 inline-block w-1/4 px-2 align-middle">
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border-2 border-gray-300 p-2 font-roboto hover:border-gray-400 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              <div className="pt-6 text-lg">Preferred Financing Tenure</div>
+              <div className="mt-4">
+                <div className="inline-block h-6 w-1/2 pl-6 pr-10">
+                  <Slider />
+                </div>
+                <div className="ml-2 inline-block w-1/4 px-2 align-middle">
+                  <input
+                    type="text"
+                    className="w-full rounded-lg border-2 border-gray-300 p-2 font-roboto hover:border-gray-400 focus:border-blue-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
+              <div className="left-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-left">
+                <p className="text-lg"></p>
+              </div>
+
+              <div className="right-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-right hover:cursor-pointer hover:border-t-4 hover:border-lime-600">
+                <Link to="/apply_financing/personal">
+                  <p className="text-lg">Next</p>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </body>
-  </main>
-    )
+    </div>
+  );
 }
+
