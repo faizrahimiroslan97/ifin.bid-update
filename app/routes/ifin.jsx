@@ -4,8 +4,6 @@ import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import {
-  FaBars,
-  FaTimes,
   FaRegUser,
   FaRegBell,
   FaRegCreditCard,
@@ -13,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { AiOutlineDashboard, AiOutlineSetting } from "react-icons/ai";
 import { GrDocumentText } from "react-icons/gr";
-import { BsMegaphone, BsTags, BsXCircle } from "react-icons/bs";
+import { BsMegaphone } from "react-icons/bs";
 import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 
 export default function IfinPage() {

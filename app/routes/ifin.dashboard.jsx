@@ -8,16 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import {
-  FaBars,
-  FaTimes,
-  FaRegUser,
-  FaRegBell,
-  FaRegCreditCard,
-  FaChartBar,
-} from "react-icons/fa";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { GrDocumentText } from "react-icons/gr";
 import { BsMegaphone, BsTags, BsXCircle } from "react-icons/bs";
 import dashStyles from "~/styles/global.css";
 

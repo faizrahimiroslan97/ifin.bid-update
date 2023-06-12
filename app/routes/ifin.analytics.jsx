@@ -9,17 +9,8 @@ import {
   Legend,
 } from "chart.js";
 import {
-  FaBars,
-  FaTimes,
-  FaRegUser,
-  FaRegBell,
-  FaRegCreditCard,
-  FaChartBar,
+  FaChartBar
 } from "react-icons/fa";
-import { GrDocumentText } from "react-icons/gr";
-import { BiHelpCircle } from "react-icons/bi";
-import { BsMegaphone} from "react-icons/bs";
-import { FiSettings } from "react-icons/fi";
 import dashStyles from "~/styles/global.css";
 
 export function links() {
@@ -27,12 +18,12 @@ export function links() {
 }
 
 export const meta = () => {
-  return [{ title: "Dashboard" }];
+  return [{ title: "Analytics" }];
 };
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-export default function DashboardPage() {
+export default function AnalyticsPage() {
     return(
         <main>
         <head>
