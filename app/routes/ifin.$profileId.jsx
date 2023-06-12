@@ -41,12 +41,7 @@ export default function display() {
       <p className="py-6">{data.profile.phone}</p>
       <p className="py-6">{data.profile.account}</p>
       <p className="py-6">{data.profile.date}</p>
-      <p className="py-6">{data.profile.address1}</p>
-      <p className="py-6">{data.profile.address2}</p>
-      <p className="py-6">{data.profile.country}</p>
-      <p className="py-6">{data.profile.state}</p>
-      <p className="py-6">{data.profile.postalcode}</p>
-      <p className="py-6">{data.profile.city}</p>
+      <p className="py-6">{data.profile.address}</p>
       <hr className="my-4" />
       <Form method="post">
         <button

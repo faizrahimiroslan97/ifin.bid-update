@@ -2,7 +2,7 @@
 
 import { prisma } from "~/db.server";
 
-export const loader = async ({ request }) => {
+export async function loader({ request }) {
   const host =
     request.headers.get("X-Forwarded-Host") ?? request.headers.get("host");
 
@@ -16,9 +16,10 @@ export const loader = async ({ request }) => {
         if (!r.ok) return Promise.reject(r);
       }),
     ]);
+
     return new Response("OK");
   } catch (error) {
     console.log("healthcheck ❌", { error });
     return new Response("ERROR", { status: 500 });
   }
-};
+}
