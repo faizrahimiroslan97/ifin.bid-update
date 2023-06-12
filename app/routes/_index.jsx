@@ -47,28 +47,7 @@ export default function Index() {
                   </div>
                 )}
               </div>
-              <a href="https://remix.run">
-                <img
-                  src="https://user-images.githubusercontent.com/1500684/158298926-e45dafff-3544-4b69-96d6-d3bcc33fc76a.svg"
-                  alt="Remix"
-                  className="mx-auto mt-16 w-full max-w-[12rem] md:max-w-[16rem]"
-                />
-              </a>
             </div>
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
-          <div className="mt-6 flex flex-wrap justify-center gap-8">
-            {[].map((img) => (
-              <a
-                key={img.href}
-                href={img.href}
-                className="flex h-16 w-32 justify-center p-1 grayscale transition hover:grayscale-0 focus:grayscale-0"
-              >
-                <img alt={img.alt} src={img.src} className="object-contain" />
-              </a>
-            ))}
           </div>
         </div>
       </div>
