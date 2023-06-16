@@ -89,7 +89,7 @@ export default function LoginPage() {
       <head></head>
       <body className="flex h-screen justify-center bg-gradient-to-b from-cyan-50 to-lime-100">
         <div className="absolute z-10 flex h-screen w-screen bg-login bg-cover opacity-20 mix-blend-darken blur-md grayscale"></div>
-        <div className="z-20 m-auto flex h-176 w-176 flex-col rounded-2xl bg-white shadow-md drop-shadow-md">
+        <div className="z-20 m-auto flex h-176 w-1/3 flex-col rounded-2xl bg-white shadow-md drop-shadow-md">
           <Form method="post" className="h-full">
             <div className="m-4 rounded-t-xl bg-lime-600 pb-6 pt-6">
               <h1 className="text-center font-poppins text-5xl font-bold text-white">
