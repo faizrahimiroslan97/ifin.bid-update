@@ -110,12 +110,14 @@ export default function IfinPage() {
                 </span>
               </div>
             </Link>
-            <Link to="/ifin/logout" className="text-base text-lime-950">
-              <div className="mb-2 ml-2 mr-2 mt-2 block rounded-md pb-3 pl-4 pr-4 pt-3 hover:cursor-pointer hover:bg-white">
-                <BiLogOut className="inline-block text-3xl" />
-                Log Out
-              </div>
-            </Link>
+            <Form action="/logout" method="post" className="text-base text-lime-950">
+          <button
+            type="submit"
+            className="mb-2 ml-2 mr-2 mt-2 block rounded-md pb-3 pl-4 pr-40 pt-3 hover:cursor-pointer hover:bg-white">
+            <BiLogOut className="inline-block text-3xl" />
+            Logout
+          </button>
+        </Form>
           </div>
         </nav>
         <div className="ml-72 flex bg-white p-6">
