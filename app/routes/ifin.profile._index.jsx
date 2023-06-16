@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "@remix-run/react";
+import { json, redirect } from "@remix-run/node";
+import React, {useState} from "react";
 import { FaRegUser } from "react-icons/fa";
-import { useActionData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 
 import { createProfile } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
+import { useEffect, useRef } from "react";
 
 export async function action({ request }) {
   const userId = await requireUserId(request);
@@ -22,6 +23,7 @@ export async function action({ request }) {
   const state = formData.get("state");
   const postalcode = formData.get("postalcode");
   const city = formData.get("city");
+  
 
 
   if (typeof firstname !== "string" || firstname.length === 0) {
@@ -115,20 +117,20 @@ export async function action({ request }) {
 
 export default function NewProfilePage() {
   const actionData = useActionData();
-  const firstnameRef = React.useRef(null);
-  const lastnameRef = React.useRef(null);
-  const gmailRef = React.useRef(null);
-  const phoneRef = React.useRef(null);
-  const accountRef = React.useRef(null);
-  const birthdateRef = React.useRef(null);
-  const address1Ref = React.useRef(null);
-  const address2Ref = React.useRef(null);
-  const countryRef = React.useRef(null);
-  const stateRef = React.useRef(null);
-  const postalcodeRef = React.useRef(null);
-  const cityRef = React.useRef(null);
+  const firstnameRef = useRef(null);
+  const lastnameRef = useRef(null);
+  const gmailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const accountRef = useRef(null);
+  const birthdateRef = useRef(null);
+  const address1Ref = useRef(null);
+  const address2Ref = useRef(null);
+  const countryRef = useRef(null);
+  const stateRef = useRef(null);
+  const postalcodeRef = useRef(null);
+  const cityRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (actionData?.errors?.firstname) {
       firstnameRef.current?.focus();
     } else if (actionData?.errors?.lastname) {
@@ -191,6 +193,7 @@ export default function NewProfilePage() {
   };
 
   return (
+    <Form method="post">
     <div className="my-12 flex h-fit flex-col px-12 py-4 align-middle">
       <div className="mt-8 flex h-1/2 flex-row">
         <div className="w-1/3">
@@ -425,9 +428,15 @@ export default function NewProfilePage() {
           </div>
         </div>
       </div>
-      <div  className="h-184 w-full rounded-2xl border-2 border-gray-700 bg-white shadow-md drop-shadow-md"></div>
-      <button className="items-center bottom-4 hover:text-lime-600 font-size-10">Save</button>
-    
+      <div className="text-center">
+        <button 
+          type="submit"
+          className="absolute bottom-3 left-100 rounded bg-lime-500 px-4 py-2 text-white hover:bg-lime-600 focus:bg-lime-400 "
+        >
+          Save
+        </button>
+        </div>
   </div>
+  </Form>
   );
 }
