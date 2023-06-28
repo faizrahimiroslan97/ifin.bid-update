@@ -14,6 +14,14 @@ import { GrDocumentText } from "react-icons/gr";
 import { BsMegaphone } from "react-icons/bs";
 import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 
+import dashStyles from "~/styles/global.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: dashStyles }];
+}
+
+export const meta = () => [{ title: "IFIN.BID" }];
+
 export default function IfinPage() {
   const data = useLoaderData();
   const user = useUser();
@@ -24,7 +32,7 @@ export default function IfinPage() {
         <nav
           id="navBar"
           className={
-            "fixed left-0 top-0 flex h-screen w-72 flex-col justify-between overflow-y-auto bg-gradient-to-r from-lime-700 to-lime-500 font-poppins drop-shadow-lg"
+            "font-poppins fixed left-0 top-0 flex h-screen w-72 flex-col justify-between overflow-y-auto bg-gradient-to-r from-lime-700 to-lime-500 drop-shadow-lg"
           }
         >
           <div>
@@ -110,14 +118,19 @@ export default function IfinPage() {
                 </span>
               </div>
             </Link>
-            <Form action="/logout" method="post" className="text-base text-lime-950">
-          <button
-            type="submit"
-            className="mb-2 ml-2 mr-2 mt-2 block rounded-md pb-3 pl-4 pr-40 pt-3 hover:cursor-pointer hover:bg-white">
-            <BiLogOut className="inline-block text-3xl" />
-            Logout
-          </button>
-        </Form>
+            <Form
+              action="/logout"
+              method="post"
+              className="text-base text-lime-950"
+            >
+              <button
+                type="submit"
+                className="mb-2 ml-2 mr-2 mt-2 block rounded-md pb-3 pl-4 pr-40 pt-3 hover:cursor-pointer hover:bg-white"
+              >
+                <BiLogOut className="inline-block text-3xl" />
+                Logout
+              </button>
+            </Form>
           </div>
         </nav>
         <div className="ml-72 flex bg-white p-6">

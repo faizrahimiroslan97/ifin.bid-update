@@ -1,5 +1,5 @@
 import { json, redirect } from "@remix-run/node";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { Form, useActionData } from "@remix-run/react";
 
@@ -23,94 +23,286 @@ export async function action({ request }) {
   const state = formData.get("state");
   const postalcode = formData.get("postalcode");
   const city = formData.get("city");
-  
-
 
   if (typeof firstname !== "string" || firstname.length === 0) {
     return json(
-      { errors: { firstname: "firstname is required", lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: "firstname is required",
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof lastname !== "string" || lastname.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: "lastname is required", gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: null,
+          lastname: "lastname is required",
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof gmail !== "string" || gmail.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: "gmail is required", phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: "gmail is required",
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof phone !== "string" || phone.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: "phone is required", account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: "phone is required",
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof account !== "string" || account.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:"account is required", birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: "account is required",
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof birthdate !== "string" || birthdate.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: "birthdate is required", address1: null, address2: null, country: null, state: null, postalcode: null, city: null, } },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: "birthdate is required",
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof address1 !== "string" || address1.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: "address1 is required", address2: null, country: null, state: null, postalcode: null, city: null,} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: "address1 is required",
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof address2 !== "string" || address2.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: "address2 is required", country: null, state: null, postalcode: null, city: null,} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: "address2 is required",
+          country: null,
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof country !== "string" || country.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: "country is required", state: null, postalcode: null, city: null,} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: "country is required",
+          state: null,
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof state !== "string" || state.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: "state is required", postalcode: null, city: null,} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: "state is required",
+          postalcode: null,
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof postalcode !== "string" || postalcode.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode:"postalcode is required", city: null,} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: "postalcode is required",
+          city: null,
+        },
+      },
       { status: 400 }
     );
   }
 
   if (typeof city !== "string" || city.length === 0) {
     return json(
-      { errors: { firstname: null, lastname: null, gmail: null, phone: null, account:null, birthdate: null, address1: null, address2: null, country: null, state: null, postalcode: null, city: "city is required",} },
+      {
+        errors: {
+          firstname: null,
+          lastname: null,
+          gmail: null,
+          phone: null,
+          account: null,
+          birthdate: null,
+          address1: null,
+          address2: null,
+          country: null,
+          state: null,
+          postalcode: null,
+          city: "city is required",
+        },
+      },
       { status: 400 }
     );
   }
 
-  const profile = await createProfile({ firstname, lastname, gmail, phone, account, birthdate, address1, address2, country, state, postalcode, city, userId });
+  const profile = await createProfile({
+    firstname,
+    lastname,
+    gmail,
+    phone,
+    account,
+    birthdate,
+    address1,
+    address2,
+    country,
+    state,
+    postalcode,
+    city,
+    userId,
+  });
 
   return redirect(`/profile/${profile.id}`);
 }
@@ -155,7 +347,7 @@ export default function NewProfilePage() {
       postalcodeRef.current?.focus();
     } else if (actionData?.errors?.address) {
       cityRef.current?.focus();
-    } 
+    }
   }, [actionData]);
 
   const [value, setValue] = React.useState("Johor");
@@ -194,249 +386,271 @@ export default function NewProfilePage() {
 
   return (
     <Form method="post">
-    <div className="my-12 flex h-fit flex-col px-12 py-4 align-middle">
-      <div className="mt-8 flex h-1/2 flex-row">
-        <div className="w-1/3">
-          <div className="m-auto mt-4 h-40 w-40 rounded-full border-2 border-gray-600 p-12 shadow-md drop-shadow-md">
-            <FaRegUser className="text-6xl" />
+      <div className="my-12 flex h-fit flex-col px-12 py-4 align-middle">
+        <div className="mt-8 flex h-1/2 flex-row">
+          <div className="w-1/3">
+            <div className="m-auto mt-4 h-40 w-40 rounded-full border-2 border-gray-600 p-12 shadow-md drop-shadow-md">
+              <FaRegUser className="text-6xl" />
+            </div>
+            <div className="mt-4 text-center">
+              <button
+                type="button"
+                className="rounded border-2 border-black bg-gray-200 px-4 py-1 hover:border-gray-500 hover:bg-gray-100"
+              >
+                Upload image...
+              </button>
+            </div>
           </div>
-          <div className="mt-4 text-center">
-            <button
-              type="button"
-              className="rounded border-2 border-black bg-gray-200 px-4 py-1 hover:border-gray-500 hover:bg-gray-100"
-            >
-              Upload image...
-            </button>
+
+          <div className="flex w-2/3 flex-row">
+            <div className="ml-4 mr-8 w-1/2 text-lg">
+              <div className="font-medium">
+                First Name
+                <input
+                  ref={firstnameRef}
+                  name="firstname"
+                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  aria-invalid={
+                    actionData?.errors?.firstname ? true : undefined
+                  }
+                  aria-errormessage={
+                    actionData?.errors?.firstname
+                      ? "firstname-error"
+                      : undefined
+                  }
+                />
+                {actionData?.errors?.firstname && (
+                  <div className="pt-1 text-red-500" id="firstname-error">
+                    {actionData.errors.firstname}
+                  </div>
+                )}
+              </div>
+
+              <div className="font-medium">
+                E-mail
+                <input
+                  ref={gmailRef}
+                  name="gmail"
+                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  aria-invalid={actionData?.errors?.gmail ? true : undefined}
+                  aria-errormessage={
+                    actionData?.errors?.gmail ? "gmail-error" : undefined
+                  }
+                />
+                {actionData?.errors?.gmail && (
+                  <div className="pt-1 text-red-500" id="gmail-error">
+                    {actionData.errors.gmail}
+                  </div>
+                )}
+              </div>
+
+              <div className="font-medium">
+                NRIC
+                <input
+                  ref={accountRef}
+                  name="account"
+                  placeholder="XXXXXX-XX-XXXX"
+                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  aria-invalid={actionData?.errors?.account ? true : undefined}
+                  aria-errormessage={
+                    actionData?.errors?.account ? "account-error" : undefined
+                  }
+                />
+                {actionData?.errors?.account && (
+                  <div className="pt-1 text-red-500" id="account-error">
+                    {actionData.errors.account}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="ml-8 mr-4 w-1/2 text-lg">
+              <div className="font-medium">
+                Last Name
+                <input
+                  ref={lastnameRef}
+                  name="lastname"
+                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  aria-invalid={actionData?.errors?.lastname ? true : undefined}
+                  aria-errormessage={
+                    actionData?.errors?.lastname ? "lastname-error" : undefined
+                  }
+                />
+                {actionData?.errors?.lastname && (
+                  <div className="pt-1 text-red-700" id="lastname-error">
+                    {actionData.errors.lastname}
+                  </div>
+                )}
+              </div>
+
+              <div className="font-medium">
+                Mobile Phone No.
+                <input
+                  ref={phoneRef}
+                  name="phone"
+                  placeholder="XXX-XXXXXXXX"
+                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  aria-invalid={actionData?.errors?.phone ? true : undefined}
+                  aria-errormessage={
+                    actionData?.errors?.phone ? "phone-error" : undefined
+                  }
+                />
+                {actionData?.errors?.phone && (
+                  <div className="pt-1 text-red-500" id="phone-error">
+                    {actionData.errors.phone}
+                  </div>
+                )}
+              </div>
+              <div className="font-medium">
+                Date of Birth
+                <div
+                  class="relative mb-3"
+                  data-te-datepicker-init
+                  data-te-inline="true"
+                  data-te-input-wrapper-init
+                >
+                  <input
+                    type="text"
+                    class="peer-focus:text-primary dark:peer-focus:text-primary peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    placeholder="Select a date"
+                  />
+                  <label
+                    for="floatingInput"
+                    class="peer-focus:text-primary dark:peer-focus:text-primary pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200"
+                  >
+                    Date of Birth
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div className="flex w-2/3 flex-row">
+        <div className="mt-6 flex h-1/2 flex-row">
           <div className="ml-4 mr-8 w-1/2 text-lg">
-            <div className="font-medium">First Name
-            <input
-            ref={firstnameRef}
-            name="firstname"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.firstname ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.firstname ? "firstname-error" : undefined
-            }
-            />
-        {actionData?.errors?.firstname && (
-          <div className="pt-1 text-red-500" id="firstname-error">
-            {actionData.errors.firstname}
-          </div>
-        )}
-          </div>
-            
-            <div className="font-medium">E-mail
-            <input
-            ref={gmailRef}
-            name="gmail"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.gmail ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.gmail ? "gmail-error" : undefined
-            }
-            />
-        {actionData?.errors?.gmail && (
-          <div className="pt-1 text-red-500" id="gmail-error">
-            {actionData.errors.gmail}
-          </div>
-        )}
-          </div>
-            
-            <div className="font-medium">NRIC
-            <input
-            ref={accountRef}
-            name="account"
-            placeholder="XXXXXX-XX-XXXX"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+            <div className="font-medium">
+              Address Line 1
+              <input
+                ref={address1Ref}
+                name="address1"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.address1 ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.address1 ? "address1-error" : undefined
+                }
+              />
+              {actionData?.errors?.address1 && (
+                <div className="pt-1 text-red-500" id="address1-error">
+                  {actionData.errors.address1}
+                </div>
+              )}
+            </div>
 
-            aria-invalid={actionData?.errors?.account ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.account ? "account-error" : undefined
-            }
-            />
-        {actionData?.errors?.account && (
-          <div className="pt-1 text-red-500" id="account-error">
-            {actionData.errors.account}
-          </div>
-        )}
-          </div>
+            <div className="font-medium">
+              Country
+              <input
+                ref={countryRef}
+                name="country"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.country ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.country ? "country-error" : undefined
+                }
+              />
+              {actionData?.errors?.country && (
+                <div className="pt-1 text-red-500" id="country-error">
+                  {actionData.errors.country}
+                </div>
+              )}
+            </div>
+
+            <div className="font-medium">
+              Postal Code
+              <input
+                ref={postalcodeRef}
+                name="postalcode"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.postalcode ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.postalcode
+                    ? "postalcode-error"
+                    : undefined
+                }
+              />
+              {actionData?.errors?.postalcode && (
+                <div className="pt-1 text-red-500" id="postalcode-error">
+                  {actionData.errors.postalcode}
+                </div>
+              )}
+            </div>
           </div>
           <div className="ml-8 mr-4 w-1/2 text-lg">
-            <div className="font-medium">Last Name
-            <input
-            ref={lastnameRef}
-            name="lastname"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.lastname ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.lastname ? "lastname-error" : undefined
-            }
-          />
-        {actionData?.errors?.lastname && (
-          <div className="pt-1 text-red-700" id="lastname-error">
-            {actionData.errors.lastname}
+            <div className="font-medium">
+              Address Line 2
+              <input
+                ref={address2Ref}
+                name="address2"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.address2 ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.address2 ? "address2-error" : undefined
+                }
+              />
+              {actionData?.errors?.address2 && (
+                <div className="pt-1 text-red-500" id="address2-error">
+                  {actionData.errors.address2}
+                </div>
+              )}
+            </div>
+
+            <div className="font-medium">
+              State
+              <input
+                ref={stateRef}
+                name="state"
+                aria-invalid={actionData?.errors?.state ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.state ? "state-error" : undefined
+                }
+              />
+              {actionData?.errors?.state && (
+                <div className="pt-1 text-red-500" id="state-error">
+                  {actionData.errors.state}
+                </div>
+              )}
+              <Dropdown
+                options={options}
+                value={value}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="font-medium">
+              City
+              <input
+                ref={cityRef}
+                name="city"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.city ? true : undefined}
+                aria-errormessage={
+                  actionData?.errors?.city ? "city-error" : undefined
+                }
+              />
+              {actionData?.errors?.city && (
+                <div className="pt-1 text-red-500" id="city-error">
+                  {actionData.errors.city}
+                </div>
+              )}
+            </div>
           </div>
-        )}
-          </div>
-            
-            <div className="font-medium">Mobile Phone No.
-            <input
-            ref={phoneRef}
-            name="phone"
-            placeholder="XXX-XXXXXXXX"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.phone ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.phone ? "phone-error" : undefined
-            }
-            />
-        {actionData?.errors?.phone && (
-          <div className="pt-1 text-red-500" id="phone-error">
-            {actionData.errors.phone}
-          </div>
-        )}
-          </div>
-            <div className="font-medium">Date of Birth
-            <input
-            ref={birthdateRef}
-            name="birthdate"
-            placeholder="dd/mm/yyyy"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.birthdate ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.birthdate ? "birthdate-error" : undefined
-            }
-            />
-        {actionData?.errors?.birthdate && (
-          <div className="pt-1 text-red-500" id="birthdate-error">
-            {actionData.errors.birthdate}
-          </div>
-        )}
-          </div>
-          </div>
+        </div>
+        <div className="text-center">
+          <button
+            type="submit"
+            className="left-100 absolute bottom-3 rounded bg-lime-500 px-4 py-2 text-white hover:bg-lime-600 focus:bg-lime-400 "
+          >
+            Save
+          </button>
         </div>
       </div>
-      <div className="mt-6 flex h-1/2 flex-row">
-        <div className="ml-4 mr-8 w-1/2 text-lg">
-          <div className="font-medium">Address Line 1
-          <input
-            ref={address1Ref}
-            name="address1"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.address1 ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.address1 ? "address1-error" : undefined
-            }
-            />
-        {actionData?.errors?.address1 && (
-          <div className="pt-1 text-red-500" id="address1-error">
-            {actionData.errors.address1}
-          </div>
-        )}
-          </div>
-          
-          <div className="font-medium">Country
-          <input
-            ref={countryRef}
-            name="country"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.country ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.country ? "country-error" : undefined
-            }
-            />
-        {actionData?.errors?.country && (
-          <div className="pt-1 text-red-500" id="country-error">
-            {actionData.errors.country}
-          </div>
-        )}
-          </div>
-          
-          <div className="font-medium">Postal Code
-          <input
-            ref={postalcodeRef}
-            name="postalcode"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.postalcode ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.postalcode ? "postalcode-error" : undefined
-            }
-            />
-        {actionData?.errors?.postalcode && (
-          <div className="pt-1 text-red-500" id="postalcode-error">
-            {actionData.errors.postalcode}
-          </div>
-        )}
-          </div>
-          
-        </div>
-        <div className="ml-8 mr-4 w-1/2 text-lg">
-          <div className="font-medium">Address Line 2
-          <input
-            ref={address2Ref}
-            name="address2"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.address2 ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.address2 ? "address2-error" : undefined
-            }
-            />
-        {actionData?.errors?.address2 && (
-          <div className="pt-1 text-red-500" id="address2-error">
-            {actionData.errors.address2}
-          </div>
-        )}
-          </div>
-          
-          <div className="font-medium">State
-          <input
-            ref={stateRef}
-            name="state"
-            
-            aria-invalid={actionData?.errors?.state ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.state ? "state-error" : undefined
-            }
-            />
-        {actionData?.errors?.state && (
-          <div className="pt-1 text-red-500" id="state-error">
-            {actionData.errors.state}
-          </div>
-        )}
-          <Dropdown options={options} value={value} onChange={handleChange} />
-          </div>
-          
-          <div className="font-medium">City
-          <input
-            ref={cityRef}
-            name="city"
-            className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-            aria-invalid={actionData?.errors?.city ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.city ? "city-error" : undefined
-            }
-            />
-        {actionData?.errors?.city && (
-          <div className="pt-1 text-red-500" id="city-error">
-            {actionData.errors.city}
-          </div>
-        )}
-          </div>
-        </div>
-      </div>
-      <div className="text-center">
-        <button 
-          type="submit"
-          className="absolute bottom-3 left-100 rounded bg-lime-500 px-4 py-2 text-white hover:bg-lime-600 focus:bg-lime-400 "
-        >
-          Save
-        </button>
-        </div>
-  </div>
-  </Form>
+    </Form>
   );
 }
