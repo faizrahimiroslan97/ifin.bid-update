@@ -13,6 +13,7 @@ export default {
       height: {
         "176": "44rem;",
         "184": "46rem;",
+        "232": "58rem;",
       },
       width: {
         "128": "32rem;",
@@ -25,6 +26,7 @@ export default {
         carfinanceIcon: "url('img/car_finance.png')",
         businessfinanceIcon: "url('img/business_finance.png')",
         filemissingIcon: "url('img/file_missing.png')",
+        maybankiIcon: "url('img/maybank_i.jpg')",
       },
     },
   },

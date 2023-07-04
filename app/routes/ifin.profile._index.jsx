@@ -626,7 +626,6 @@ export default function NewProfilePage() {
           </div>
         </div>
       </div>
-
       <div className="fixed bottom-0 w-full justify-between border-t-2 border-gray-600 text-center">
         <button
           type="submit"

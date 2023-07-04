@@ -22,11 +22,7 @@ export default function ifinbidApplicationRoute() {
         </span>
       </div>
       <div className="h-auto">
-        <div className="pb-4 pt-4 font-poppins">
-          <div className="h-184 w-full rounded-2xl border-2 border-gray-300 bg-white shadow-md drop-shadow-md">
-            <Outlet />
-          </div>
-        </div>
+        <Outlet />
       </div>
     </div>
   );
