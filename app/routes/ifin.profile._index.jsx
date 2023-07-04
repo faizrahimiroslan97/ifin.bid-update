@@ -385,271 +385,255 @@ export default function NewProfilePage() {
   };
 
   return (
-    <Form method="post">
-      <div className="my-12 flex h-fit flex-col px-12 py-4 align-middle">
-        <div className="mt-8 flex h-1/2 flex-row">
-          <div className="w-1/3">
-            <div className="m-auto mt-4 h-40 w-40 rounded-full border-2 border-gray-600 p-12 shadow-md drop-shadow-md">
-              <FaRegUser className="text-6xl" />
-            </div>
-            <div className="mt-4 text-center">
-              <button
-                type="button"
-                className="rounded border-2 border-black bg-gray-200 px-4 py-1 hover:border-gray-500 hover:bg-gray-100"
-              >
-                Upload image...
-              </button>
-            </div>
+    <Form method="post" className="flex flex-col pt-20">
+      <div className="mt-2 flex w-full flex-row gap-y-4 px-12 py-2 align-middle">
+        <div className="w-1/3">
+          <div className="m-auto mt-4 h-40 w-40 rounded-full border-2 border-gray-600 p-12 shadow-md drop-shadow-md">
+            <FaRegUser className="text-6xl" />
           </div>
-
-          <div className="flex w-2/3 flex-row">
-            <div className="ml-4 mr-8 w-1/2 text-lg">
-              <div className="font-medium">
-                First Name
-                <input
-                  ref={firstnameRef}
-                  name="firstname"
-                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                  aria-invalid={
-                    actionData?.errors?.firstname ? true : undefined
-                  }
-                  aria-errormessage={
-                    actionData?.errors?.firstname
-                      ? "firstname-error"
-                      : undefined
-                  }
-                />
-                {actionData?.errors?.firstname && (
-                  <div className="pt-1 text-red-500" id="firstname-error">
-                    {actionData.errors.firstname}
-                  </div>
-                )}
-              </div>
-
-              <div className="font-medium">
-                E-mail
-                <input
-                  ref={gmailRef}
-                  name="gmail"
-                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                  aria-invalid={actionData?.errors?.gmail ? true : undefined}
-                  aria-errormessage={
-                    actionData?.errors?.gmail ? "gmail-error" : undefined
-                  }
-                />
-                {actionData?.errors?.gmail && (
-                  <div className="pt-1 text-red-500" id="gmail-error">
-                    {actionData.errors.gmail}
-                  </div>
-                )}
-              </div>
-
-              <div className="font-medium">
-                NRIC
-                <input
-                  ref={accountRef}
-                  name="account"
-                  placeholder="XXXXXX-XX-XXXX"
-                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                  aria-invalid={actionData?.errors?.account ? true : undefined}
-                  aria-errormessage={
-                    actionData?.errors?.account ? "account-error" : undefined
-                  }
-                />
-                {actionData?.errors?.account && (
-                  <div className="pt-1 text-red-500" id="account-error">
-                    {actionData.errors.account}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="ml-8 mr-4 w-1/2 text-lg">
-              <div className="font-medium">
-                Last Name
-                <input
-                  ref={lastnameRef}
-                  name="lastname"
-                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                  aria-invalid={actionData?.errors?.lastname ? true : undefined}
-                  aria-errormessage={
-                    actionData?.errors?.lastname ? "lastname-error" : undefined
-                  }
-                />
-                {actionData?.errors?.lastname && (
-                  <div className="pt-1 text-red-700" id="lastname-error">
-                    {actionData.errors.lastname}
-                  </div>
-                )}
-              </div>
-
-              <div className="font-medium">
-                Mobile Phone No.
-                <input
-                  ref={phoneRef}
-                  name="phone"
-                  placeholder="XXX-XXXXXXXX"
-                  className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                  aria-invalid={actionData?.errors?.phone ? true : undefined}
-                  aria-errormessage={
-                    actionData?.errors?.phone ? "phone-error" : undefined
-                  }
-                />
-                {actionData?.errors?.phone && (
-                  <div className="pt-1 text-red-500" id="phone-error">
-                    {actionData.errors.phone}
-                  </div>
-                )}
-              </div>
-              <div className="font-medium">
-                Date of Birth
-                <div
-                  class="relative mb-3"
-                  data-te-datepicker-init
-                  data-te-inline="true"
-                  data-te-input-wrapper-init
-                >
-                  <input
-                    type="text"
-                    class="peer-focus:text-primary dark:peer-focus:text-primary peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    placeholder="Select a date"
-                  />
-                  <label
-                    for="floatingInput"
-                    class="peer-focus:text-primary dark:peer-focus:text-primary pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200"
-                  >
-                    Date of Birth
-                  </label>
-                </div>
-              </div>
-            </div>
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              className="rounded border-2 border-black bg-gray-200 px-4 py-1 hover:border-gray-500 hover:bg-gray-100"
+            >
+              Upload image...
+            </button>
           </div>
         </div>
-        <div className="mt-6 flex h-1/2 flex-row">
+        <div className="flex w-2/3 flex-row">
           <div className="ml-4 mr-8 w-1/2 text-lg">
             <div className="font-medium">
-              Address Line 1
+              First Name
               <input
-                ref={address1Ref}
-                name="address1"
+                ref={firstnameRef}
+                name="firstname"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.address1 ? true : undefined}
+                aria-invalid={actionData?.errors?.firstname ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.address1 ? "address1-error" : undefined
+                  actionData?.errors?.firstname ? "firstname-error" : undefined
                 }
               />
-              {actionData?.errors?.address1 && (
-                <div className="pt-1 text-red-500" id="address1-error">
-                  {actionData.errors.address1}
+              {actionData?.errors?.firstname && (
+                <div className="pt-1 text-red-500" id="firstname-error">
+                  {actionData.errors.firstname}
                 </div>
               )}
             </div>
 
             <div className="font-medium">
-              Country
+              E-mail
               <input
-                ref={countryRef}
-                name="country"
+                ref={gmailRef}
+                name="gmail"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.country ? true : undefined}
+                aria-invalid={actionData?.errors?.gmail ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.country ? "country-error" : undefined
+                  actionData?.errors?.gmail ? "gmail-error" : undefined
                 }
               />
-              {actionData?.errors?.country && (
-                <div className="pt-1 text-red-500" id="country-error">
-                  {actionData.errors.country}
+              {actionData?.errors?.gmail && (
+                <div className="pt-1 text-red-500" id="gmail-error">
+                  {actionData.errors.gmail}
                 </div>
               )}
             </div>
 
             <div className="font-medium">
-              Postal Code
+              NRIC
               <input
-                ref={postalcodeRef}
-                name="postalcode"
+                ref={accountRef}
+                name="account"
+                placeholder="XXXXXX-XX-XXXX"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.postalcode ? true : undefined}
+                aria-invalid={actionData?.errors?.account ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.postalcode
-                    ? "postalcode-error"
-                    : undefined
+                  actionData?.errors?.account ? "account-error" : undefined
                 }
               />
-              {actionData?.errors?.postalcode && (
-                <div className="pt-1 text-red-500" id="postalcode-error">
-                  {actionData.errors.postalcode}
+              {actionData?.errors?.account && (
+                <div className="pt-1 text-red-500" id="account-error">
+                  {actionData.errors.account}
                 </div>
               )}
             </div>
           </div>
           <div className="ml-8 mr-4 w-1/2 text-lg">
             <div className="font-medium">
-              Address Line 2
+              Last Name
               <input
-                ref={address2Ref}
-                name="address2"
+                ref={lastnameRef}
+                name="lastname"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.address2 ? true : undefined}
+                aria-invalid={actionData?.errors?.lastname ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.address2 ? "address2-error" : undefined
+                  actionData?.errors?.lastname ? "lastname-error" : undefined
                 }
               />
-              {actionData?.errors?.address2 && (
-                <div className="pt-1 text-red-500" id="address2-error">
-                  {actionData.errors.address2}
+              {actionData?.errors?.lastname && (
+                <div className="pt-1 text-red-700" id="lastname-error">
+                  {actionData.errors.lastname}
                 </div>
               )}
             </div>
 
             <div className="font-medium">
-              State
+              Mobile Phone No.
               <input
-                ref={stateRef}
-                name="state"
-                aria-invalid={actionData?.errors?.state ? true : undefined}
+                ref={phoneRef}
+                name="phone"
+                placeholder="XXX-XXXXXXXX"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                aria-invalid={actionData?.errors?.phone ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.state ? "state-error" : undefined
+                  actionData?.errors?.phone ? "phone-error" : undefined
                 }
               />
-              {actionData?.errors?.state && (
-                <div className="pt-1 text-red-500" id="state-error">
-                  {actionData.errors.state}
+              {actionData?.errors?.phone && (
+                <div className="pt-1 text-red-500" id="phone-error">
+                  {actionData.errors.phone}
                 </div>
               )}
-              <Dropdown
-                options={options}
-                value={value}
-                onChange={handleChange}
-              />
             </div>
-
             <div className="font-medium">
-              City
+              Date of Birth
               <input
-                ref={cityRef}
-                name="city"
+                ref={birthdateRef}
+                name="birthdate"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.city ? true : undefined}
+                aria-invalid={actionData?.errors?.birthdate ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.city ? "city-error" : undefined
+                  actionData?.errors?.birthdate ? "birthdate-error" : undefined
                 }
               />
-              {actionData?.errors?.city && (
-                <div className="pt-1 text-red-500" id="city-error">
-                  {actionData.errors.city}
+              {actionData?.errors?.birthdate && (
+                <div className="pt-1 text-red-500" id="birthdate-error">
+                  {actionData.errors.birthdate}
                 </div>
               )}
             </div>
           </div>
         </div>
-        <div className="text-center">
-          <button
-            type="submit"
-            className="left-100 absolute bottom-3 rounded bg-lime-500 px-4 py-2 text-white hover:bg-lime-600 focus:bg-lime-400 "
-          >
-            Save
-          </button>
+      </div>
+      <div className="mt-6 flex h-1/2 flex-row">
+        <div className="ml-4 mr-8 w-1/2 text-lg">
+          <div className="font-medium">
+            Address Line 1
+            <input
+              ref={address1Ref}
+              name="address1"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.address1 ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.address1 ? "address1-error" : undefined
+              }
+            />
+            {actionData?.errors?.address1 && (
+              <div className="pt-1 text-red-500" id="address1-error">
+                {actionData.errors.address1}
+              </div>
+            )}
+          </div>
+
+          <div className="font-medium">
+            Country
+            <input
+              ref={countryRef}
+              name="country"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.country ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.country ? "country-error" : undefined
+              }
+            />
+            {actionData?.errors?.country && (
+              <div className="pt-1 text-red-500" id="country-error">
+                {actionData.errors.country}
+              </div>
+            )}
+          </div>
+
+          <div className="font-medium">
+            Postal Code
+            <input
+              ref={postalcodeRef}
+              name="postalcode"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.postalcode ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.postalcode ? "postalcode-error" : undefined
+              }
+            />
+            {actionData?.errors?.postalcode && (
+              <div className="pt-1 text-red-500" id="postalcode-error">
+                {actionData.errors.postalcode}
+              </div>
+            )}
+          </div>
         </div>
+        <div className="ml-8 mr-4 w-1/2 text-lg">
+          <div className="font-medium">
+            Address Line 2
+            <input
+              ref={address2Ref}
+              name="address2"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.address2 ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.address2 ? "address2-error" : undefined
+              }
+            />
+            {actionData?.errors?.address2 && (
+              <div className="pt-1 text-red-500" id="address2-error">
+                {actionData.errors.address2}
+              </div>
+            )}
+          </div>
+
+          <div className="font-medium">
+            State
+            <input
+              ref={stateRef}
+              name="state"
+              aria-invalid={actionData?.errors?.state ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.state ? "state-error" : undefined
+              }
+            />
+            {actionData?.errors?.state && (
+              <div className="pt-1 text-red-500" id="state-error">
+                {actionData.errors.state}
+              </div>
+            )}
+            <Dropdown options={options} value={value} onChange={handleChange} />
+          </div>
+
+          <div className="font-medium">
+            City
+            <input
+              ref={cityRef}
+              name="city"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.city ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.city ? "city-error" : undefined
+              }
+            />
+            {actionData?.errors?.city && (
+              <div className="pt-1 text-red-500" id="city-error">
+                {actionData.errors.city}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="fixed bottom-0 w-full justify-between border-t-2 border-gray-600 text-center">
+        <button
+          type="submit"
+          className="w-full border-t-4 border-transparent px-4 py-4 hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
+        >
+          <p className="text-lg">Save</p>
+        </button>
       </div>
     </Form>
   );

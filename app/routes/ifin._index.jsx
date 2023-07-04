@@ -1,6 +1,5 @@
 import { Link } from "@remix-run/react";
 
-export default function IfinIndexPage() {
-  return
-    
+export default function ifinbidIndexRoute() {
+  return;
 }
