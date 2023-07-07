@@ -5,7 +5,7 @@ import homefinanceIcon from "img/home_finance.png";
 import carfinanceIcon from "img/car_finance.png";
 import businessfinanceIcon from "img/business_finance.png";
 
-export default function ifinbidApplyIndexRoute() {
+export default function ApplyIndexRoute() {
   return (
     <div className="pb-4 pt-4 font-poppins">
       <div className="h-184 w-full rounded-2xl border-2 border-gray-300 bg-white shadow-md drop-shadow-md">

@@ -1,7 +1,7 @@
-import { Link, Outlet } from "@remix-run/react";
+import { Outlet } from "@remix-run/react";
 import { FaRegCreditCard } from "react-icons/fa";
 
-export default function ifinbidApplyRoute() {
+export default function ApplyRoute() {
   return (
     <div className="mx-10 my-6 w-full">
       <div className="h-14">
