@@ -71,7 +71,7 @@ export const meta = () => [{ title: "Login" }];
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/ifin";
+  const redirectTo = searchParams.get("redirectTo") || "/ifin/dashboard";
   const actionData = useActionData();
   const emailRef = React.useRef(null);
   const passwordRef = React.useRef(null);
