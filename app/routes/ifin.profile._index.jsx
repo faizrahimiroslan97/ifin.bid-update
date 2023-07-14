@@ -5,7 +5,9 @@ import { Form, useActionData } from "@remix-run/react";
 
 import { createProfile } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
+import { useUser } from "~/utils";
 import { useEffect, useRef } from "react";
+import DatePicker from "react-datepicker";
 
 export async function action({ request }) {
   const userId = await requireUserId(request);
@@ -308,6 +310,7 @@ export async function action({ request }) {
 }
 
 export default function NewProfilePage() {
+  const user = useUser();
   const actionData = useActionData();
   const firstnameRef = useRef(null);
   const lastnameRef = useRef(null);
@@ -370,6 +373,9 @@ export default function NewProfilePage() {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const [date, setDate] = useState(new Date());
+
   const Dropdown = ({ value, options, onChange }) => {
     return (
       <select
@@ -401,9 +407,9 @@ export default function NewProfilePage() {
           </div>
         </div>
         <div className="flex w-2/3 flex-row">
-          <div className="ml-4 mr-8 w-1/2 text-lg">
-            <div className="font-medium">
-              First Name
+          <div className="ml-4 mr-8 w-1/2">
+            <div>
+              <h1 className="w-full text-lg font-medium">First Name</h1>
               <input
                 ref={firstnameRef}
                 name="firstname"
@@ -419,12 +425,12 @@ export default function NewProfilePage() {
                 </div>
               )}
             </div>
-
-            <div className="font-medium">
-              E-mail
+            <div>
+              <h1 className="w-full text-lg font-medium">E-mail</h1>
               <input
                 ref={gmailRef}
                 name="gmail"
+                value={user.gmail}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.gmail ? true : undefined}
                 aria-errormessage={
@@ -437,9 +443,10 @@ export default function NewProfilePage() {
                 </div>
               )}
             </div>
-
-            <div className="font-medium">
-              NRIC
+            <div>
+              <h1 className="w-full text-lg font-medium">
+                Identification Number
+              </h1>
               <input
                 ref={accountRef}
                 name="account"
@@ -458,8 +465,8 @@ export default function NewProfilePage() {
             </div>
           </div>
           <div className="ml-8 mr-4 w-1/2 text-lg">
-            <div className="font-medium">
-              Last Name
+            <div>
+              <h1 className="w-full text-lg font-medium">Last Name</h1>
               <input
                 ref={lastnameRef}
                 name="lastname"
@@ -475,13 +482,12 @@ export default function NewProfilePage() {
                 </div>
               )}
             </div>
-
-            <div className="font-medium">
-              Mobile Phone No.
+            <div>
+              <h1 className="w-full text-lg font-medium">Mobile Phone No.</h1>
               <input
                 ref={phoneRef}
                 name="phone"
-                placeholder="XXX-XXXXXXXX"
+                placeholder="0XXXXXXXXXX"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.phone ? true : undefined}
                 aria-errormessage={
@@ -494,17 +500,17 @@ export default function NewProfilePage() {
                 </div>
               )}
             </div>
-            <div className="font-medium">
-              Date of Birth
-              <input
-                ref={birthdateRef}
-                name="birthdate"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.birthdate ? true : undefined}
-                aria-errormessage={
-                  actionData?.errors?.birthdate ? "birthdate-error" : undefined
-                }
-              />
+            <div>
+              <h1 className="w-full text-lg font-medium">Date of Birth</h1>
+              <div className="mb-2 mt-0.5">
+                <DatePicker
+                  className="rounded border-x-0 border-b-2 border-t-0 border-gray-500 px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  selected={date}
+                  onChange={(date) => setDate(date)}
+                  showMonthDropdown="true"
+                  showYearDropdown="true"
+                />
+              </div>
               {actionData?.errors?.birthdate && (
                 <div className="pt-1 text-red-500" id="birthdate-error">
                   {actionData.errors.birthdate}
@@ -516,8 +522,8 @@ export default function NewProfilePage() {
       </div>
       <div className="mt-6 flex h-1/2 flex-row">
         <div className="ml-4 mr-8 w-1/2 text-lg">
-          <div className="font-medium">
-            Address Line 1
+          <div>
+            <h1 className="w-full text-lg font-medium">Address Line 1</h1>
             <input
               ref={address1Ref}
               name="address1"
@@ -533,9 +539,8 @@ export default function NewProfilePage() {
               </div>
             )}
           </div>
-
-          <div className="font-medium">
-            Country
+          <div>
+            <h1 className="w-full text-lg font-medium">Country</h1>
             <input
               ref={countryRef}
               name="country"
@@ -551,9 +556,8 @@ export default function NewProfilePage() {
               </div>
             )}
           </div>
-
-          <div className="font-medium">
-            Postal Code
+          <div>
+            <h1 className="w-full text-lg font-medium">Postal Code</h1>
             <input
               ref={postalcodeRef}
               name="postalcode"
@@ -571,8 +575,8 @@ export default function NewProfilePage() {
           </div>
         </div>
         <div className="ml-8 mr-4 w-1/2 text-lg">
-          <div className="font-medium">
-            Address Line 2
+          <div>
+            <h1 className="w-full text-lg font-medium">Address Line 2</h1>
             <input
               ref={address2Ref}
               name="address2"
@@ -588,27 +592,17 @@ export default function NewProfilePage() {
               </div>
             )}
           </div>
-
-          <div className="font-medium">
-            State
-            <input
-              ref={stateRef}
-              name="state"
-              aria-invalid={actionData?.errors?.state ? true : undefined}
-              aria-errormessage={
-                actionData?.errors?.state ? "state-error" : undefined
-              }
-            />
+          <div>
+            <h1 className="w-full text-lg font-medium">State</h1>
+            <Dropdown options={options} value={value} onChange={handleChange} />
             {actionData?.errors?.state && (
               <div className="pt-1 text-red-500" id="state-error">
                 {actionData.errors.state}
               </div>
             )}
-            <Dropdown options={options} value={value} onChange={handleChange} />
           </div>
-
-          <div className="font-medium">
-            City
+          <div>
+            <h1 className="w-full text-lg font-medium">City</h1>
             <input
               ref={cityRef}
               name="city"
