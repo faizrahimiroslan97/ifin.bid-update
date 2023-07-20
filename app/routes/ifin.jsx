@@ -132,7 +132,7 @@ export default function IfinPage() {
           </Form>
         </div>
       </nav>
-      <div className="ml-72 flex min-h-screen bg-white p-6">
+      <div className="ml-72 flex min-h-screen bg-gray-50 p-6">
         <Outlet />
       </div>
     </main>

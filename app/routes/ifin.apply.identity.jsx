@@ -37,119 +37,75 @@ export default function ApplyIdentityRoute() {
   };
 
   return (
-    <div className="pb-4 pt-4 font-poppins">
-      <div className="h-184 w-full rounded-2xl border-2 border-gray-300 bg-white shadow-md drop-shadow-md">
-        <div className="fixed inline-flex w-full flex-row justify-between border-b-2 border-gray-600 text-center">
-          <Link
-            to="/ifin/apply"
-            className="mx-2 w-full border-b-4 border-transparent px-4 py-4 text-base text-lime-950 hover:cursor-pointer hover:border-lime-600"
-          >
-            <p className="text-xl">1. Financing Options</p>
-          </Link>
-          <Link
-            to="/ifin/apply/identity"
-            className="mx-2 w-full border-b-4 border-transparent px-4 py-4 text-base text-lime-950 hover:cursor-pointer hover:border-lime-600"
-          >
-            <p className="text-xl">2. Identity Verification</p>
-          </Link>
-          <Link
-            to="/ifin/apply/income"
-            className="mx-2 w-full border-b-4 border-transparent px-4 py-4 text-base text-lime-950 hover:cursor-pointer hover:border-lime-600"
-          >
-            <p className="text-xl">3. Income Verification</p>
-          </Link>
-          <Link
-            to="/ifin/apply/review"
-            className="mx-2 w-full border-b-4 border-transparent px-4 py-4 text-base text-lime-950 hover:cursor-pointer hover:border-lime-600"
-          >
-            <p className="text-xl">4. Review Data</p>
-          </Link>
-        </div>
-        <div className="flex">
-          <div className="my-20 flex h-fit w-full flex-col gap-y-2 px-12 py-4 align-middle">
-            <h1 className="text-2xl font-bold">Update Personal Details</h1>
-            <div className="flex gap-x-12">
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">
-                  First Name
-                </h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">Last Name</h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">
-                  Mobile Phone No.
-                </h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-            </div>
-            <div className="flex gap-x-12">
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">E-Mail</h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">NRIC</h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">
-                  Date of Birth
-                </h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-            </div>
-            <div className="mt-2">
-              <h2 className="text-lg font-medium text-gray-500">
-                Address Line 1
-              </h2>
-              <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-            </div>
-            <div className="mt-2">
-              <h2 className="text-lg font-medium text-gray-500">
-                Address Line 2
-              </h2>
-              <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-            </div>
-            <div className="flex gap-x-12">
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">City</h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">State</h2>
-                <Dropdown
-                  options={options}
-                  value={value}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="w-1/3 text-lg">
-                <h2 className="text-lg font-medium text-gray-500">
-                  Postal Code
-                </h2>
-                <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
-              </div>
-            </div>
+    <div className="flex">
+      <div className="my-20 flex h-fit w-full flex-col gap-y-2 px-12 py-4 align-middle">
+        <h1 className="text-2xl font-bold">Update Personal Details</h1>
+        <div className="flex gap-x-12">
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">First Name</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
           </div>
-          <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
-            <Link
-              to="/ifin/apply/"
-              className="left-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-left hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
-            >
-              <p className="text-lg">Previous</p>
-            </Link>
-            <Link
-              to="/ifin/apply/identity_proof"
-              className="right-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-right hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
-            >
-              <p className="text-lg">Next</p>
-            </Link>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">Last Name</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">
+              Mobile Phone No.
+            </h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
           </div>
         </div>
+        <div className="flex gap-x-12">
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">E-Mail</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">NRIC</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">Date of Birth</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+        </div>
+        <div className="mt-2">
+          <h2 className="text-lg font-medium text-gray-500">Address Line 1</h2>
+          <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+        </div>
+        <div className="mt-2">
+          <h2 className="text-lg font-medium text-gray-500">Address Line 2</h2>
+          <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+        </div>
+        <div className="flex gap-x-12">
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">City</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">State</h2>
+            <Dropdown options={options} value={value} onChange={handleChange} />
+          </div>
+          <div className="w-1/3 text-lg">
+            <h2 className="text-lg font-medium text-gray-500">Postal Code</h2>
+            <input className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 px-4 py-2 text-base focus:border-blue-500 focus:outline-none" />
+          </div>
+        </div>
+      </div>
+      <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
+        <Link
+          to="/ifin/apply/"
+          className="left-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-left hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
+        >
+          <p className="text-lg">Previous</p>
+        </Link>
+        <Link
+          to="/ifin/apply/identity_proof"
+          className="right-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-right hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
+        >
+          <p className="text-lg">Next</p>
+        </Link>
       </div>
     </div>
   );
