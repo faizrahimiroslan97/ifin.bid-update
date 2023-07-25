@@ -2,7 +2,20 @@ import { prisma } from "~/db.server";
 
 export function getProfile({ id, userId }) {
   return prisma.profile.findFirst({
-    select: { id: true, city:true, postalcode:true, state:true, country:true, address2:true,address1:true, date:true, account:true, phone:true, gmail:true, lastname:true, firstname:true},
+    select: {
+      id: true,
+      city: true,
+      postalcode: true,
+      state: true,
+      country: true,
+      address2: true,
+      address1: true,
+      date: true,
+      account: true,
+      phone: true,
+      lastname: true,
+      firstname: true,
+    },
     where: { id, userId },
   });
 }
@@ -15,12 +28,20 @@ export function getProfileListItems({ userId }) {
   });
 }
 
-export function createProfile({ firstname, lastname, gmail, phone, account, birthdate, address1, address2, country, state, postalcode, city, userId }) {
+export function createProfile({
+  phone,
+  account,
+  birthdate,
+  address1,
+  address2,
+  country,
+  state,
+  postalcode,
+  city,
+  userId,
+}) {
   return prisma.profile.create({
     data: {
-      firstname,
-      lastname,
-      gmail,
       phone,
       account,
       birthdate,
@@ -30,7 +51,42 @@ export function createProfile({ firstname, lastname, gmail, phone, account, birt
       state,
       postalcode,
       city,
-      user: {        
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  });
+}
+
+export function updateProfile({
+  phone,
+  account,
+  birthdate,
+  address1,
+  address2,
+  country,
+  state,
+  postalcode,
+  city,
+  userId,
+}) {
+  return prisma.profile.update({
+    where: {
+      user: userId,
+    },
+    data: {
+      phone,
+      account,
+      birthdate,
+      address1,
+      address2,
+      country,
+      state,
+      postalcode,
+      city,
+      user: {
         connect: {
           id: userId,
         },

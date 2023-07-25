@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { Link, Form, useActionData } from "@remix-run/react";
 
-import { createProfile } from "~/models/profile.server";
+import { updateProfile } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import { useEffect, useRef } from "react";
@@ -290,10 +290,23 @@ export async function action({ request }) {
     );
   }
 
+  const profile = await updateProfile({
+    phone,
+    account,
+    birthdate,
+    address1,
+    address2,
+    country,
+    state,
+    postalcode,
+    city,
+    userId,
+  });
+
   return redirect(`/profile/${profile.id}`);
 }
 
-export default function ProfileIndexPage() {
+export default function ProfileEditPage() {
   const user = useUser();
   const actionData = useActionData();
   const firstnameRef = useRef(null);
@@ -337,11 +350,42 @@ export default function ProfileIndexPage() {
     }
   }, [actionData]);
 
+  const [value, setValue] = React.useState("Johor");
+  const options = [
+    { label: "Johor", value: "Johor" },
+    { label: "Kedah", value: "Kedah" },
+    { label: "Kelantan", value: "Kelantan" },
+    { label: "Malacca", value: "Malacca" },
+    { label: "Negeri Sembilan", value: "Negeri Sembilan" },
+    { label: "Pahang", value: "Pahang" },
+    { label: "Penang", value: "Penang" },
+    { label: "Perak", value: "Perak" },
+    { label: "Perlis", value: "Perlis" },
+    { label: "Sabah", value: "Sabah" },
+    { label: "Sarawak", value: "Sarawak" },
+    { label: "Selangor", value: "Selangor" },
+    { label: "Terengganu", value: "Terengganu" },
+    { label: "WP Kuala Lumpur", value: "WP Kuala Lumpur" },
+  ];
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   const [date, setDate] = useState(new Date());
+
+  const Dropdown = ({ value, options, onChange }) => {
+    return (
+      <select
+        value={value}
+        onChange={onChange}
+        className="mb-2 mt-0.5 w-full rounded border-2 border-gray-500 px-2 py-2 text-xl hover:cursor-pointer"
+      >
+        {options.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+    );
+  };
 
   return (
     <Form method="post" className="flex flex-col pt-20">
@@ -366,12 +410,10 @@ export default function ProfileIndexPage() {
                 First Name
               </h1>
               <input
-                disabled
                 ref={firstnameRef}
                 name="firstname"
                 value={user.firstname}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.firstname ? true : undefined}
                 aria-errormessage={
                   actionData?.errors?.firstname ? "firstname-error" : undefined
@@ -388,12 +430,10 @@ export default function ProfileIndexPage() {
                 E-mail
               </h1>
               <input
-                disabled
                 ref={emailRef}
                 name="email"
                 value={user.email}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-errormessage={
                   actionData?.errors?.email ? "email-error" : undefined
@@ -410,12 +450,10 @@ export default function ProfileIndexPage() {
                 Identification Number
               </h1>
               <input
-                disabled
                 ref={accountRef}
                 name="account"
-                value={user.account}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                placeholder="XXXXXX-XX-XXXX"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.account ? true : undefined}
                 aria-errormessage={
                   actionData?.errors?.account ? "account-error" : undefined
@@ -434,12 +472,10 @@ export default function ProfileIndexPage() {
                 Last Name
               </h1>
               <input
-                disabled
                 ref={lastnameRef}
                 name="lastname"
                 value={user.lastname}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.lastname ? true : undefined}
                 aria-errormessage={
                   actionData?.errors?.lastname ? "lastname-error" : undefined
@@ -456,12 +492,10 @@ export default function ProfileIndexPage() {
                 Mobile Phone No.
               </h1>
               <input
-                disabled
                 ref={phoneRef}
                 name="phone"
-                value={user.phone}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                placeholder="0XXXXXXXXXX"
+                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.phone ? true : undefined}
                 aria-errormessage={
                   actionData?.errors?.phone ? "phone-error" : undefined
@@ -477,21 +511,18 @@ export default function ProfileIndexPage() {
               <h1 className="w-full text-lg font-semibold text-gray-500">
                 Date of Birth
               </h1>
-              <input
-                disabled
-                ref={phoneRef}
-                name="phone"
-                value={user.phone}
-                placeholder="-"
-                className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.phone ? true : undefined}
-                aria-errormessage={
-                  actionData?.errors?.phone ? "phone-error" : undefined
-                }
-              />
-              {actionData?.errors?.phone && (
-                <div className="pt-1 text-red-500" id="phone-error">
-                  {actionData.errors.phone}
+              <div className="mb-2 mt-0.5">
+                <DatePicker
+                  className="w-full rounded border-x-0 border-b-2 border-t-0 border-gray-500 bg-gray-100 px-4 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                  selected={date}
+                  onChange={(date) => setDate(date)}
+                  showMonthDropdown="true"
+                  showYearDropdown="true"
+                />
+              </div>
+              {actionData?.errors?.birthdate && (
+                <div className="pt-1 text-red-500" id="birthdate-error">
+                  {actionData.errors.birthdate}
                 </div>
               )}
             </div>
@@ -505,12 +536,9 @@ export default function ProfileIndexPage() {
               Address Line 1
             </h1>
             <input
-              disabled
               ref={address1Ref}
               name="address1"
-              value={user.address1}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address1 ? true : undefined}
               aria-errormessage={
                 actionData?.errors?.address1 ? "address1-error" : undefined
@@ -527,12 +555,9 @@ export default function ProfileIndexPage() {
               Country
             </h1>
             <input
-              disabled
               ref={countryRef}
               name="country"
-              value={user.country}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.country ? true : undefined}
               aria-errormessage={
                 actionData?.errors?.country ? "country-error" : undefined
@@ -549,12 +574,9 @@ export default function ProfileIndexPage() {
               Postal Code
             </h1>
             <input
-              disabled
               ref={postalcodeRef}
               name="postalcode"
-              value={user.postalcode}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100  px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.postalcode ? true : undefined}
               aria-errormessage={
                 actionData?.errors?.postalcode ? "postalcode-error" : undefined
@@ -573,12 +595,9 @@ export default function ProfileIndexPage() {
               Address Line 2
             </h1>
             <input
-              disabled
               ref={address2Ref}
               name="address2"
-              value={user.address2}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address2 ? true : undefined}
               aria-errormessage={
                 actionData?.errors?.address2 ? "address2-error" : undefined
@@ -594,18 +613,7 @@ export default function ProfileIndexPage() {
             <h1 className="w-full text-lg font-semibold text-gray-500">
               State
             </h1>
-            <input
-              disabled
-              ref={stateRef}
-              name="state"
-              value={user.state}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
-              aria-invalid={actionData?.errors?.state ? true : undefined}
-              aria-errormessage={
-                actionData?.errors?.state ? "state-error" : undefined
-              }
-            />
+            <Dropdown options={options} value={value} onChange={handleChange} />
             {actionData?.errors?.state && (
               <div className="pt-1 text-red-500" id="state-error">
                 {actionData.errors.state}
@@ -615,12 +623,9 @@ export default function ProfileIndexPage() {
           <div>
             <h1 className="w-full text-lg font-semibold text-gray-500">City</h1>
             <input
-              disabled
               ref={cityRef}
               name="city"
-              value={user.city}
-              placeholder="-"
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.city ? true : undefined}
               aria-errormessage={
                 actionData?.errors?.city ? "city-error" : undefined
@@ -634,13 +639,19 @@ export default function ProfileIndexPage() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 flex w-full justify-between border-t-2 border-gray-600 text-center">
+      <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
         <Link
-          to="/ifin/profile/edit"
-          className="w-full border-t-4 border-transparent px-4 py-4 hover:cursor-pointer hover:border-t-4 hover:border-lime-600"
+          to="/ifin/profile/"
+          className="left-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-left hover:cursor-pointer hover:border-t-4 hover:border-red-800"
         >
-          <p className="text-lg">Edit</p>
+          <p className="text-lg">Cancel</p>
         </Link>
+        <button
+          type="submit"
+          className="right-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-right hover:cursor-pointer hover:border-t-4 hover:border-lime-600 hover:font-semibold"
+        >
+          <p className="text-lg">Save</p>
+        </button>
       </div>
     </Form>
   );

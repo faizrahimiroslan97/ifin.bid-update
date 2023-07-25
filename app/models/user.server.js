@@ -23,6 +23,19 @@ export async function createUser(email, firstname, lastname, password) {
           hash: hashedPassword,
         },
       },
+      profile: {
+        create: {
+          phone: "",
+          account: "",
+          birthdate: "",
+          address1: "",
+          address2: "",
+          country: "",
+          state: "",
+          postalcode: "",
+          city: "",
+        },
+      },
     },
   });
 }

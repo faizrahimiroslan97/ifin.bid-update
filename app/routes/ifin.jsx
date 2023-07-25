@@ -42,7 +42,7 @@ export default function IfinPage() {
           </div>
           <div className="mb-4 mt-4 flex bg-white pb-4 pt-4">
             <Link
-              to="/ifin/profile"
+              to="/ifin/profile/"
               className="text-base text-lime-950 hover:cursor-pointer"
             >
               <div className="ml-4 mr-1 inline-block rounded-full border-0 border-gray-600 p-3 align-middle shadow-lg">
@@ -127,7 +127,9 @@ export default function IfinPage() {
               className="mb-2 ml-2 mr-2 mt-2 block rounded-md pb-3 pl-4 pr-40 pt-3 hover:cursor-pointer hover:bg-white"
             >
               <BiLogOut className="inline-block text-3xl" />
-              Logout
+              <span className="ml-2 inline-block align-middle text-base">
+                Logout
+              </span>
             </button>
           </Form>
         </div>
