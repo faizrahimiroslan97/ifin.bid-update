@@ -73,9 +73,6 @@ export function updateProfile({
   userId,
 }) {
   return prisma.profile.update({
-    where: {
-      user: userId,
-    },
     data: {
       phone,
       account,
@@ -90,6 +87,9 @@ export function updateProfile({
         connect: {
           id: userId,
         },
+      },
+      where: {
+        user: userId,
       },
     },
   });

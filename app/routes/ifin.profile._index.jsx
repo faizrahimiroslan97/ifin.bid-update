@@ -337,12 +337,6 @@ export default function ProfileIndexPage() {
     }
   }, [actionData]);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const [date, setDate] = useState(new Date());
-
   return (
     <Form method="post" className="flex flex-col pt-20">
       <div className="mt-2 flex w-full flex-row gap-y-4 px-12 py-2 align-middle">

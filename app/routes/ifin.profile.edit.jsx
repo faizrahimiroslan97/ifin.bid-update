@@ -1,7 +1,7 @@
 import { json, redirect } from "@remix-run/node";
 import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
-import { Link, Form, useActionData } from "@remix-run/react";
+import { Link, Form, useActionData, useSearchParams } from "@remix-run/react";
 
 import { updateProfile } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
@@ -11,7 +11,6 @@ import DatePicker from "react-datepicker";
 
 export async function action({ request }) {
   const userId = await requireUserId(request);
-
   const formData = await request.formData();
   const firstname = formData.get("firstname");
   const lastname = formData.get("lastname");
@@ -303,11 +302,13 @@ export async function action({ request }) {
     userId,
   });
 
-  return redirect(`/profile/${profile.id}`);
+  return redirect(`/profile`);
 }
 
 export default function ProfileEditPage() {
   const user = useUser();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/ifin/profile";
   const actionData = useActionData();
   const firstnameRef = useRef(null);
   const lastnameRef = useRef(null);
@@ -367,8 +368,29 @@ export default function ProfileEditPage() {
     { label: "Terengganu", value: "Terengganu" },
     { label: "WP Kuala Lumpur", value: "WP Kuala Lumpur" },
   ];
+
+  const [firstname, setFirstName] = useState(user.firstname);
+  const [lastname, setLastName] = useState(user.lastname);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [account, setAccount] = useState(user.account);
+  const [address1, setAddress1] = useState(user.address);
+  const [address2, setAddress2] = useState(user.address2);
+  const [country, setCountry] = useState(user.country);
+  const [postalcode, setPostalCode] = useState(user.postalcode);
+  const [city, setCity] = useState(user.city);
   const handleChange = (event) => {
     setValue(event.target.value);
+    setFirstName(event.target.firstname);
+    setLastName(event.target.lastname);
+    setEmail(event.target.email);
+    setPhone(event.target.phone);
+    setAccount(event.target.account);
+    setAddress1(event.target.address1);
+    setAddress2(event.target.address2);
+    setCountry(event.target.country);
+    setPostalCode(event.target.postalcode);
+    setCity(event.target.city);
   };
 
   const [date, setDate] = useState(new Date());
@@ -412,7 +434,8 @@ export default function ProfileEditPage() {
               <input
                 ref={firstnameRef}
                 name="firstname"
-                value={user.firstname}
+                onChange={handleChange}
+                value={firstname}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.firstname ? true : undefined}
                 aria-errormessage={
@@ -432,7 +455,8 @@ export default function ProfileEditPage() {
               <input
                 ref={emailRef}
                 name="email"
-                value={user.email}
+                onChange={handleChange}
+                value={email}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-errormessage={
@@ -452,6 +476,8 @@ export default function ProfileEditPage() {
               <input
                 ref={accountRef}
                 name="account"
+                onChange={handleChange}
+                value={account}
                 placeholder="XXXXXX-XX-XXXX"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.account ? true : undefined}
@@ -474,7 +500,8 @@ export default function ProfileEditPage() {
               <input
                 ref={lastnameRef}
                 name="lastname"
-                value={user.lastname}
+                onChange={handleChange}
+                value={lastname}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.lastname ? true : undefined}
                 aria-errormessage={
@@ -494,6 +521,8 @@ export default function ProfileEditPage() {
               <input
                 ref={phoneRef}
                 name="phone"
+                onChange={handleChange}
+                value={phone}
                 placeholder="0XXXXXXXXXX"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.phone ? true : undefined}
@@ -514,6 +543,7 @@ export default function ProfileEditPage() {
               <div className="mb-2 mt-0.5">
                 <DatePicker
                   className="w-full rounded border-x-0 border-b-2 border-t-0 border-gray-500 bg-gray-100 px-4 py-2 text-xl focus:border-blue-500 focus:outline-none"
+                  name="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
                   showMonthDropdown="true"
@@ -538,6 +568,8 @@ export default function ProfileEditPage() {
             <input
               ref={address1Ref}
               name="address1"
+              onChange={handleChange}
+              value={address1}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address1 ? true : undefined}
               aria-errormessage={
@@ -557,6 +589,8 @@ export default function ProfileEditPage() {
             <input
               ref={countryRef}
               name="country"
+              onChange={handleChange}
+              value={country}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.country ? true : undefined}
               aria-errormessage={
@@ -576,6 +610,8 @@ export default function ProfileEditPage() {
             <input
               ref={postalcodeRef}
               name="postalcode"
+              onChange={handleChange}
+              value={postalcode}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100  px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.postalcode ? true : undefined}
               aria-errormessage={
@@ -597,6 +633,8 @@ export default function ProfileEditPage() {
             <input
               ref={address2Ref}
               name="address2"
+              onChange={handleChange}
+              value={address2}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address2 ? true : undefined}
               aria-errormessage={
@@ -613,7 +651,12 @@ export default function ProfileEditPage() {
             <h1 className="w-full text-lg font-semibold text-gray-500">
               State
             </h1>
-            <Dropdown options={options} value={value} onChange={handleChange} />
+            <Dropdown
+              name="state"
+              options={options}
+              value={value}
+              onChange={handleChange}
+            />
             {actionData?.errors?.state && (
               <div className="pt-1 text-red-500" id="state-error">
                 {actionData.errors.state}
@@ -625,6 +668,8 @@ export default function ProfileEditPage() {
             <input
               ref={cityRef}
               name="city"
+              onChange={handleChange}
+              value={city}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.city ? true : undefined}
               aria-errormessage={
@@ -646,6 +691,7 @@ export default function ProfileEditPage() {
         >
           <p className="text-lg">Cancel</p>
         </Link>
+        <input type="hidden" name="redirectTo" value={redirectTo} />
         <button
           type="submit"
           className="right-0 mx-2 w-1/2 border-t-4 border-transparent px-4 py-4 text-right hover:cursor-pointer hover:border-t-4 hover:border-lime-600 hover:font-semibold"

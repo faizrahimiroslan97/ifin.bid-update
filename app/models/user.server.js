@@ -40,6 +40,36 @@ export async function createUser(email, firstname, lastname, password) {
   });
 }
 
+export async function updateUser(email, firstname, lastname, password) {
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  return prisma.user.update({
+    data: {
+      email,
+      firstname,
+      lastname,
+      password: {
+        create: {
+          hash: hashedPassword,
+        },
+      },
+      profile: {
+        create: {
+          phone: "",
+          account: "",
+          birthdate: "",
+          address1: "",
+          address2: "",
+          country: "",
+          state: "",
+          postalcode: "",
+          city: "",
+        },
+      },
+    },
+  });
+}
+
 export async function deleteUserByEmail(email) {
   return prisma.user.delete({ where: { email } });
 }

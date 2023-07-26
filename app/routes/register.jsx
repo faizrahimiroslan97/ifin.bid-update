@@ -79,7 +79,7 @@ export async function action({ request }) {
 
 export const meta = () => [{ title: "Sign Up" }];
 
-export default function Join() {
+export default function RegisterRoute() {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const actionData = useActionData();
