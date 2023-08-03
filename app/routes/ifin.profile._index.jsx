@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { Link, Form, useActionData } from "@remix-run/react";
 
-import { createProfile } from "~/models/profile.server";
-import { requireUserId } from "~/session.server";
+import { getUserById } from "~/models/user.server";
+import { requireUserId, getUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import { useEffect, useRef } from "react";
-import DatePicker from "react-datepicker";
 
 export async function action({ request }) {
   const userId = await requireUserId(request);
@@ -295,6 +294,7 @@ export async function action({ request }) {
 
 export default function ProfileIndexPage() {
   const user = useUser();
+  const profileData = JSON.parse(user.profile);
   const actionData = useActionData();
   const firstnameRef = useRef(null);
   const lastnameRef = useRef(null);
@@ -308,6 +308,13 @@ export default function ProfileIndexPage() {
   const stateRef = useRef(null);
   const postalcodeRef = useRef(null);
   const cityRef = useRef(null);
+
+  console.log(
+    /*user.profile.map((profile) => {
+      return profile.phone;
+    })*/
+    profileData
+  );
 
   useEffect(() => {
     if (actionData?.errors?.firstname) {

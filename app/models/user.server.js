@@ -3,7 +3,12 @@ import bcrypt from "bcryptjs";
 import { prisma } from "~/db.server";
 
 export async function getUserById(id) {
-  return prisma.user.findUnique({ where: { id } });
+  return prisma.user.findUnique({
+    where: { id },
+    include: {
+      profile: true,
+    },
+  });
 }
 
 export async function getUserByEmail(email) {
@@ -40,30 +45,46 @@ export async function createUser(email, firstname, lastname, password) {
   });
 }
 
-export async function updateUser(email, firstname, lastname, password) {
-  const hashedPassword = await bcrypt.hash(password, 10);
-
+export async function updateUser(
+  userId,
+  profile,
+  email,
+  firstname,
+  lastname,
+  phone,
+  account,
+  birthdate,
+  address1,
+  address2,
+  country,
+  state,
+  postalcode,
+  city
+) {
   return prisma.user.update({
+    where: {
+      id: userId.userId,
+    },
     data: {
-      email,
-      firstname,
-      lastname,
-      password: {
-        create: {
-          hash: hashedPassword,
-        },
-      },
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
       profile: {
-        create: {
-          phone: "",
-          account: "",
-          birthdate: "",
-          address1: "",
-          address2: "",
-          country: "",
-          state: "",
-          postalcode: "",
-          city: "",
+        update: {
+          where: {
+            id: profile,
+          },
+          data: {
+            phone: phone,
+            account: account,
+            birthdate: birthdate,
+            address1: address1,
+            address2: address2,
+            country: country,
+            state: state,
+            postalcode: postalcode,
+            city: city,
+          },
         },
       },
     },

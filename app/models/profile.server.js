@@ -10,13 +10,16 @@ export function getProfile({ id, userId }) {
       country: true,
       address2: true,
       address1: true,
-      date: true,
       account: true,
       phone: true,
-      lastname: true,
-      firstname: true,
     },
     where: { id, userId },
+  });
+}
+
+export function getProfileByUserId({ userId }) {
+  return prisma.profile.findFirst({
+    where: { userId },
   });
 }
 
@@ -73,6 +76,9 @@ export function updateProfile({
   userId,
 }) {
   return prisma.profile.update({
+    where: {
+      userId: userId,
+    },
     data: {
       phone,
       account,
@@ -87,9 +93,6 @@ export function updateProfile({
         connect: {
           id: userId,
         },
-      },
-      where: {
-        user: userId,
       },
     },
   });

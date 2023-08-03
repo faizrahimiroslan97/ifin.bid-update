@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { Link, Form, useActionData, useSearchParams } from "@remix-run/react";
 
-import { updateProfile } from "~/models/profile.server";
+import { updateUser } from "~/models/user.server";
+import { getProfileByUserId } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import { useEffect, useRef } from "react";
@@ -289,7 +290,16 @@ export async function action({ request }) {
     );
   }
 
-  const profile = await updateProfile({
+  const profile = await getProfileByUserId({
+    userId,
+  });
+
+  const user = await updateUser({
+    userId,
+    profile,
+    email,
+    firstname,
+    lastname,
     phone,
     account,
     birthdate,
@@ -299,7 +309,6 @@ export async function action({ request }) {
     state,
     postalcode,
     city,
-    userId,
   });
 
   return redirect(`/profile`);
@@ -372,11 +381,12 @@ export default function ProfileEditPage() {
   const [firstname, setFirstName] = useState(user.firstname);
   const [lastname, setLastName] = useState(user.lastname);
   const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
+  const [phone, setPhone] = useState(user.profile.phone);
   const [account, setAccount] = useState(user.account);
   const [address1, setAddress1] = useState(user.address);
   const [address2, setAddress2] = useState(user.address2);
   const [country, setCountry] = useState(user.country);
+  const [state, setState] = useState(user.state);
   const [postalcode, setPostalCode] = useState(user.postalcode);
   const [city, setCity] = useState(user.city);
   const handleChange = (event) => {
@@ -388,6 +398,7 @@ export default function ProfileEditPage() {
     setAccount(event.target.account);
     setAddress1(event.target.address1);
     setAddress2(event.target.address2);
+    setState(event.target.state);
     setCountry(event.target.country);
     setPostalCode(event.target.postalcode);
     setCity(event.target.city);
@@ -434,6 +445,7 @@ export default function ProfileEditPage() {
               <input
                 ref={firstnameRef}
                 name="firstname"
+                id="firstname"
                 onChange={handleChange}
                 value={firstname}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -455,6 +467,7 @@ export default function ProfileEditPage() {
               <input
                 ref={emailRef}
                 name="email"
+                id="email"
                 onChange={handleChange}
                 value={email}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -476,9 +489,10 @@ export default function ProfileEditPage() {
               <input
                 ref={accountRef}
                 name="account"
+                id="account"
                 onChange={handleChange}
                 value={account}
-                placeholder="XXXXXX-XX-XXXX"
+                placeholder="XXXXXXXXXXXX"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.account ? true : undefined}
                 aria-errormessage={
@@ -500,6 +514,7 @@ export default function ProfileEditPage() {
               <input
                 ref={lastnameRef}
                 name="lastname"
+                id="lastname"
                 onChange={handleChange}
                 value={lastname}
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -521,6 +536,7 @@ export default function ProfileEditPage() {
               <input
                 ref={phoneRef}
                 name="phone"
+                id="phone"
                 onChange={handleChange}
                 value={phone}
                 placeholder="0XXXXXXXXXX"
@@ -544,6 +560,7 @@ export default function ProfileEditPage() {
                 <DatePicker
                   className="w-full rounded border-x-0 border-b-2 border-t-0 border-gray-500 bg-gray-100 px-4 py-2 text-xl focus:border-blue-500 focus:outline-none"
                   name="birthdate"
+                  id="birthdate"
                   selected={date}
                   onChange={(date) => setDate(date)}
                   showMonthDropdown="true"
@@ -568,6 +585,7 @@ export default function ProfileEditPage() {
             <input
               ref={address1Ref}
               name="address1"
+              id="address1"
               onChange={handleChange}
               value={address1}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -589,6 +607,7 @@ export default function ProfileEditPage() {
             <input
               ref={countryRef}
               name="country"
+              id="country"
               onChange={handleChange}
               value={country}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -605,22 +624,23 @@ export default function ProfileEditPage() {
           </div>
           <div>
             <h1 className="w-full text-lg font-semibold text-gray-500">
-              Postal Code
+              State
             </h1>
             <input
-              ref={postalcodeRef}
-              name="postalcode"
+              ref={stateRef}
+              name="state"
+              id="state"
               onChange={handleChange}
-              value={postalcode}
-              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100  px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
-              aria-invalid={actionData?.errors?.postalcode ? true : undefined}
+              value={state}
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.state ? true : undefined}
               aria-errormessage={
-                actionData?.errors?.postalcode ? "postalcode-error" : undefined
+                actionData?.errors?.state ? "state-error" : undefined
               }
             />
-            {actionData?.errors?.postalcode && (
-              <div className="pt-1 text-red-500" id="postalcode-error">
-                {actionData.errors.postalcode}
+            {actionData?.errors?.state && (
+              <div className="pt-1 text-red-500" id="state-error">
+                {actionData.errors.state}
               </div>
             )}
           </div>
@@ -633,6 +653,7 @@ export default function ProfileEditPage() {
             <input
               ref={address2Ref}
               name="address2"
+              id="address2"
               onChange={handleChange}
               value={address2}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
@@ -649,17 +670,23 @@ export default function ProfileEditPage() {
           </div>
           <div>
             <h1 className="w-full text-lg font-semibold text-gray-500">
-              State
+              Postal Code
             </h1>
-            <Dropdown
-              name="state"
-              options={options}
-              value={value}
+            <input
+              ref={postalcodeRef}
+              name="postalcode"
+              id="postalcode"
               onChange={handleChange}
+              value={postalcode}
+              className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100  px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
+              aria-invalid={actionData?.errors?.postalcode ? true : undefined}
+              aria-errormessage={
+                actionData?.errors?.postalcode ? "postalcode-error" : undefined
+              }
             />
-            {actionData?.errors?.state && (
-              <div className="pt-1 text-red-500" id="state-error">
-                {actionData.errors.state}
+            {actionData?.errors?.postalcode && (
+              <div className="pt-1 text-red-500" id="postalcode-error">
+                {actionData.errors.postalcode}
               </div>
             )}
           </div>
@@ -668,6 +695,7 @@ export default function ProfileEditPage() {
             <input
               ref={cityRef}
               name="city"
+              id="city"
               onChange={handleChange}
               value={city}
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-gray-100 px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"

@@ -45,7 +45,6 @@ model Profile {
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
-
 }
 
 model Apply{
