@@ -45,45 +45,30 @@ export async function createUser(email, firstname, lastname, password) {
   });
 }
 
-export async function updateUser(
-  userId,
-  profile,
-  email,
-  firstname,
-  lastname,
-  phone,
-  account,
-  birthdate,
-  address1,
-  address2,
-  country,
-  state,
-  postalcode,
-  city
-) {
+export async function updateUser(userId) {
   return prisma.user.update({
     where: {
       id: userId.userId,
     },
     data: {
-      email: email,
-      firstname: firstname,
-      lastname: lastname,
+      email: userId.email,
+      firstname: userId.firstname,
+      lastname: userId.lastname,
       profile: {
         update: {
           where: {
-            id: profile,
+            id: userId.profile.id,
           },
           data: {
-            phone: phone,
-            account: account,
-            birthdate: birthdate,
-            address1: address1,
-            address2: address2,
-            country: country,
-            state: state,
-            postalcode: postalcode,
-            city: city,
+            phone: userId.phone,
+            account: userId.account,
+            birthdate: userId.birthdate,
+            address1: userId.address1,
+            address2: userId.address2,
+            country: userId.country,
+            state: userId.state,
+            postalcode: userId.postalcode,
+            city: userId.city,
           },
         },
       },

@@ -311,7 +311,7 @@ export async function action({ request }) {
     city,
   });
 
-  return redirect(`/profile`);
+  return redirect(`/ifin/profile`);
 }
 
 export default function ProfileEditPage() {
@@ -381,14 +381,14 @@ export default function ProfileEditPage() {
   const [firstname, setFirstName] = useState(user.firstname);
   const [lastname, setLastName] = useState(user.lastname);
   const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.profile.phone);
-  const [account, setAccount] = useState(user.account);
-  const [address1, setAddress1] = useState(user.address);
-  const [address2, setAddress2] = useState(user.address2);
-  const [country, setCountry] = useState(user.country);
-  const [state, setState] = useState(user.state);
-  const [postalcode, setPostalCode] = useState(user.postalcode);
-  const [city, setCity] = useState(user.city);
+  const [phone, setPhone] = useState(user.profile[0].phone);
+  const [account, setAccount] = useState(user.profile[0].account);
+  const [address1, setAddress1] = useState(user.profile[0].address);
+  const [address2, setAddress2] = useState(user.profile[0].address2);
+  const [country, setCountry] = useState(user.profile[0].country);
+  const [state, setState] = useState(user.profile[0].state);
+  const [postalcode, setPostalCode] = useState(user.profile[0].postalcode);
+  const [city, setCity] = useState(user.profile[0].city);
   const handleChange = (event) => {
     setValue(event.target.value);
     setFirstName(event.target.firstname);

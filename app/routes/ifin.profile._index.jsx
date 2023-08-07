@@ -294,7 +294,6 @@ export async function action({ request }) {
 
 export default function ProfileIndexPage() {
   const user = useUser();
-  const profileData = JSON.parse(user.profile);
   const actionData = useActionData();
   const firstnameRef = useRef(null);
   const lastnameRef = useRef(null);
@@ -313,7 +312,7 @@ export default function ProfileIndexPage() {
     /*user.profile.map((profile) => {
       return profile.phone;
     })*/
-    profileData
+    user.profile[0].userId
   );
 
   useEffect(() => {
@@ -414,7 +413,7 @@ export default function ProfileIndexPage() {
                 disabled
                 ref={accountRef}
                 name="account"
-                value={user.account}
+                value={user.profile[0].account}
                 placeholder="-"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.account ? true : undefined}
@@ -460,7 +459,7 @@ export default function ProfileIndexPage() {
                 disabled
                 ref={phoneRef}
                 name="phone"
-                value={user.phone}
+                value={user.profile[0].phone}
                 placeholder="-"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
                 aria-invalid={actionData?.errors?.phone ? true : undefined}
@@ -480,19 +479,19 @@ export default function ProfileIndexPage() {
               </h1>
               <input
                 disabled
-                ref={phoneRef}
-                name="phone"
-                value={user.phone}
+                ref={birthdateRef}
+                name="birthdate"
+                value={user.profile[0].birthdate}
                 placeholder="-"
                 className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
-                aria-invalid={actionData?.errors?.phone ? true : undefined}
+                aria-invalid={actionData?.errors?.birthdate ? true : undefined}
                 aria-errormessage={
-                  actionData?.errors?.phone ? "phone-error" : undefined
+                  actionData?.errors?.birthdate ? "birthdate-error" : undefined
                 }
               />
-              {actionData?.errors?.phone && (
-                <div className="pt-1 text-red-500" id="phone-error">
-                  {actionData.errors.phone}
+              {actionData?.errors?.birthdate && (
+                <div className="pt-1 text-red-500" id="birthdate-error">
+                  {actionData.errors.birthdate}
                 </div>
               )}
             </div>
@@ -509,7 +508,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={address1Ref}
               name="address1"
-              value={user.address1}
+              value={user.profile[0].address1}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address1 ? true : undefined}
@@ -531,7 +530,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={countryRef}
               name="country"
-              value={user.country}
+              value={user.profile[0].country}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.country ? true : undefined}
@@ -553,7 +552,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={postalcodeRef}
               name="postalcode"
-              value={user.postalcode}
+              value={user.profile[0].postalcode}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.postalcode ? true : undefined}
@@ -577,7 +576,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={address2Ref}
               name="address2"
-              value={user.address2}
+              value={user.profile[0].address2}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.address2 ? true : undefined}
@@ -599,7 +598,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={stateRef}
               name="state"
-              value={user.state}
+              value={user.profile[0].state}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.state ? true : undefined}
@@ -619,7 +618,7 @@ export default function ProfileIndexPage() {
               disabled
               ref={cityRef}
               name="city"
-              value={user.city}
+              value={user.profile[0].city}
               placeholder="-"
               className="mb-2 mt-0.5 w-full rounded border-b-2 border-gray-500 bg-white px-2 py-2 text-xl focus:border-blue-500 focus:outline-none"
               aria-invalid={actionData?.errors?.city ? true : undefined}
