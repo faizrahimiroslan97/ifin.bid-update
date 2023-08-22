@@ -1,5 +1,5 @@
 import { json, redirect } from "@remix-run/node";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { Link, Form, useActionData, useSearchParams } from "@remix-run/react";
 
@@ -7,7 +7,6 @@ import { updateUser } from "~/models/user.server";
 import { getProfileByUserId } from "~/models/profile.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
-import { useEffect, useRef } from "react";
 import DatePicker from "react-datepicker";
 
 export async function action({ request }) {

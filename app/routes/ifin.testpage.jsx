@@ -1,6 +1,7 @@
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsMegaphone, BsTags, BsXCircle } from "react-icons/bs";
 import { ProgressBar } from "../components/ProgressBar";
+import Slider from "../components/Slider";
 
 export default function testRoute() {
   return (
@@ -26,6 +27,7 @@ export default function testRoute() {
             </div>
             <div className="flex-1 rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md">
               <h1>Approved Offers</h1>
+              <Slider />
             </div>
             <div className="flex-1 rounded-2xl bg-white px-4 pb-2 pt-2 shadow-md drop-shadow-md">
               <h1>Closed Offers</h1>

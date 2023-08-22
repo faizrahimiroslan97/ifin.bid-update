@@ -7,6 +7,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --main-color: rgb(83, 168, 80);
+  --main-color-hover: rgb(104, 117, 217, 0.2);
+  --track-color: #ddd;
+}
+
 /*Hides scrollbar on side navbar*/
 nav {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -44,6 +50,44 @@ nav::-webkit-scrollbar {
 
 .accordion-content {
   background-color: #ffffff;
+}
+
+.customSlider {
+  /* max width of your slider */
+  max-width: 1000px;
+  /* Optional: Only If you want to center your slider in the page */
+  margin: auto;
+}
+
+.customSlider-track {
+  /* Top value to align your track to the center of your thumb */
+  top: 16px;
+  /* thickness of the track */
+  height: 8px;
+  /* default color of your track */
+  background: var(--track-color);
+  border-radius: 20px;
+}
+
+.customSlider-track.customSlider-track-0 {
+  /* color of the track before the thumb */
+  background: var(--main-color);
+}
+
+.customSlider-thumb {
+  cursor: pointer;
+  /*color for the thumb */
+  background: var(--main-color);
+  /* shape of the thumb: circle */
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  /* remove default outline when selected */
+  outline: none;
+}
+
+.customSlider-thumb:hover {
+  box-shadow: 0 0 0 8px var(--main-color-hover);
 }
 
 /* */

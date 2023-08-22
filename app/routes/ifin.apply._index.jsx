@@ -1,11 +1,25 @@
 import { Link } from "@remix-run/react";
-import Slider from "../components/Slider";
+import { useState, useEffect, useRef } from "react";
+import SliderAmount from "../components/SliderAmount";
+import { useUser } from "~/utils";
 import personalfinanceIcon from "img/personal_finance.png";
 import homefinanceIcon from "img/home_finance.png";
 import carfinanceIcon from "img/car_finance.png";
 import businessfinanceIcon from "img/business_finance.png";
 
 export default function ApplyIndexRoute() {
+  const user = useUser();
+  const amountRef = useRef(null);
+  const tenureRef = useRef(null);
+
+  const [amount, setAmount] = useState(user.amount);
+  const [tenure, setTenure] = useState(user.tenure);
+
+  const handleChange = (event) => {
+    setAmount(event.target.amount);
+    setTenure(event.target.tenure);
+  };
+
   return (
     <div className="flex flex-col pt-20">
       <div className="h-fit w-full flex-col px-12 py-4 align-middle">
@@ -61,31 +75,13 @@ export default function ApplyIndexRoute() {
           Total Amount
         </div>
         <div className="mt-4">
-          <div className="inline-block h-6 w-1/2 pl-6 pr-10">
-            <Slider />
-          </div>
-          <div className="ml-2 inline-block w-1/4 px-2 align-middle">
-            <input
-              type="text"
-              className="w-full rounded-lg border-2 border-gray-300 p-2 font-roboto hover:border-gray-400 focus:border-blue-500 focus:outline-none"
-              placeholder={"RM1000"}
-            />
-          </div>
+          <SliderAmount />
         </div>
         <div className="pt-6 text-lg font-medium text-gray-500">
           Preferred Financing Tenure
         </div>
         <div className="mt-4">
-          <div className="inline-block h-6 w-1/2 pl-6 pr-10">
-            <Slider />
-          </div>
-          <div className="ml-2 inline-block w-1/4 px-2 align-middle">
-            <input
-              type="text"
-              className="w-full rounded-lg border-2 border-gray-300 p-2 font-roboto hover:border-gray-400 focus:border-blue-500 focus:outline-none"
-              placeholder={"12 Months"}
-            />
-          </div>
+          <SliderAmount />
         </div>
       </div>
       <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
