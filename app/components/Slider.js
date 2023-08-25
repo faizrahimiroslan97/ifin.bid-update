@@ -1,12 +1,8 @@
 import { useState } from "react";
 import ReactSlider from "react-slider";
 
-const SliderAmount = () => {
+const Slider = () => {
   const [currentValue, setCurrentValue] = useState(0);
-
-  const changeValue = (event) => {
-    setCurrentValue(event.target.value);
-  };
 
   return (
     <div className="inline-block h-6 w-1/2 pl-6 pr-10">
@@ -32,4 +28,4 @@ const SliderAmount = () => {
   );
 };
 
-export default SliderAmount;
+export default Slider;

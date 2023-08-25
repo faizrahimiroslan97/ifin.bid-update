@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import { useState, useEffect, useRef } from "react";
-import SliderAmount from "../components/SliderAmount";
+import Slider from "../components/Slider";
 import { useUser } from "~/utils";
 import personalfinanceIcon from "img/personal_finance.png";
 import homefinanceIcon from "img/home_finance.png";
@@ -75,13 +75,13 @@ export default function ApplyIndexRoute() {
           Total Amount
         </div>
         <div className="mt-4">
-          <SliderAmount />
+          <Slider />
         </div>
         <div className="pt-6 text-lg font-medium text-gray-500">
           Preferred Financing Tenure
         </div>
         <div className="mt-4">
-          <SliderAmount />
+          <Slider />
         </div>
       </div>
       <div className="fixed bottom-0 inline-flex w-full flex-row justify-between border-t-2 border-gray-600">
